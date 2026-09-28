@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 import 'package:vitis/widgets/vitis_logo.dart';
-import 'package:vitis/utils/validator.dart'; 
+import 'package:vitis/utils/validator.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,7 +13,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscurePasswords = true;
-  
+
   String _name = '';
   String _email = '';
   String _password = '';
@@ -21,9 +21,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool get _isValid {
     return _name.trim().isNotEmpty &&
-           Validator.isValidEmail(_email) &&
-           _password.length >= 8 &&
-           _password == _confirmPassword; 
+        Validator.isValidEmail(_email) &&
+        _password.length >= 8 &&
+        _password == _confirmPassword;
   }
 
   void _togglePasswordsVisibility() {
@@ -43,13 +43,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 12.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 12),
 
-                    // Header 
+                    // Header
                     Row(
                       children: [
                         Container(
@@ -90,11 +93,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Logo 
+                    // Logo
                     const Center(child: VitisLogo(width: 130, height: 130)),
                     const SizedBox(height: 24),
 
-                    // Formulario 
+                    // Formulario
                     FormInput(
                       label: "NOMBRE COMPLETO",
                       hint: "María González",
@@ -117,11 +120,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    
+
                     FormInput(
                       label: "CONTRASEÑA",
                       hint: "Mínimo 8 caracteres",
                       type: Type.password,
+                      obscureText: _obscurePasswords,
                       onToggleObscure: _togglePasswordsVisibility,
                       onChanged: (value) {
                         setState(() {
@@ -134,6 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       label: "CONFIRMAR CONTRASEÑA",
                       hint: "Repetí tu contraseña",
                       type: Type.password,
+                      obscureText: _obscurePasswords,
                       onToggleObscure: _togglePasswordsVisibility,
                       onChanged: (value) {
                         setState(() {
@@ -144,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 32),
 
-                    //  Botón Crear Cuenta 
+                    //  Botón Crear Cuenta
                     Opacity(
                       opacity: _isValid ? 1.0 : 0.5,
                       child: SizedBox(
@@ -154,7 +159,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {
                             if (_isValid) {
                               // TODO: Lógica de registro
-                              () => Navigator.pop(context);
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "/login",
+                                (route) => false,
+                              );
                             }
                           },
                         ),
@@ -163,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const Spacer(),
 
-                    // Footer 
+                    // Footer
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
                       child: Row(
@@ -175,7 +184,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pop(context); 
+                              Navigator.pop(context);
                             },
                             child: Text(
                               "Iniciá sesión",

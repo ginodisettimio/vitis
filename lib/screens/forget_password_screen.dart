@@ -183,6 +183,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                       onPressed: () {
                                         if (_isCodeValid) {
                                           // TODO: Lógica de validación del código
+                                          Navigator.pushNamed(context, "/changepassword");
                                         }
                                       },
                                     ),

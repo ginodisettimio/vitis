@@ -14,6 +14,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String _email = '';
   String _password = '';
+  bool _obscurePasswords = true;
+
+  void _togglePasswordsVisibility() {
+    setState(() {
+      _obscurePasswords = !_obscurePasswords;
+    });
+  }
 
   bool get _isValid => Validator.isValidEmail(_email) && _password.length >= 8;
 
@@ -90,6 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: "Contraseña",
                       hint: "••••••••",
                       type: Type.password,
+                      obscureText: _obscurePasswords,
+                      onToggleObscure: _togglePasswordsVisibility,
                       onChanged: (value) {
                         setState(() {
                           _password = value;
