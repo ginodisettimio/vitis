@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/wallets_screen.dart';
+import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/screens/login_screen.dart';
+import 'package:vitis/screens/register_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
 
 void main() {
@@ -13,11 +16,18 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // TODO: Cambiar Home si esta logueado a "Dashboard"
       home: const LoginScreen(),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       title: "Vitis",
+      routes: {
+        "/login": (context) => LoginScreen(),
+        "/register": (context) => RegisterScreen(),
+        "/wallets": (context) => MyWalletsScreen(),
+        "/addwallet": (context) => AddWalletScreen(),
+      },
     );
   }
 }

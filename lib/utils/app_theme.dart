@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 class AppTheme {
   // Base
   static const Color textDark = Color(0xFF2D1B69);
+  static const Color textGrey = Color(0xFF757575); 
+  
   static const Color primary = Color(0xFF9B7EDE);
   static const Color primaryVariant = Color(0xFF7C5CBF);
   static const Color primaryDark = Color(0xFF5B3A9E);
+  static const Color primarySoft = Color(0x1A9B7EDE); 
 
   static const Color bgLight = Color(0xFFF8F6FC);
   static const Color inputLight = Color(0xFFF5F0FF);
@@ -65,13 +68,13 @@ class AppTheme {
         displayLarge: TextStyle(color: textDark, fontWeight: FontWeight.w900),
         titleLarge: TextStyle(color: textDark, fontWeight: FontWeight.w900),
         bodyLarge: TextStyle(color: textDark, fontWeight: FontWeight.w600),
-        bodyMedium: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+        bodyMedium: TextStyle(color: textGrey, fontWeight: FontWeight.w500),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: inputLight,
-        hintStyle: TextStyle(
-          color: Colors.grey[400],
+        hintStyle: const TextStyle(
+          color: textGrey,
           fontWeight: FontWeight.w600,
         ),
         border: OutlineInputBorder(
@@ -100,6 +103,7 @@ class AppTheme {
 
   // DarkTheme
   static ThemeData get darkTheme {
+    // ... (El resto del darkTheme se mantiene igual)
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -120,32 +124,32 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: Color(0xFF2D1B69), width: 1),
+          side: const BorderSide(color: textDark, width: 1),
         ),
       ),
-      textTheme: TextTheme(
-        displayLarge: const TextStyle(
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),
-        titleLarge: const TextStyle(
+        titleLarge: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),
-        bodyLarge: const TextStyle(
+        bodyLarge: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w600,
         ),
         bodyMedium: TextStyle(
-          color: Colors.grey[400],
+          color: textGrey,
           fontWeight: FontWeight.w500,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: inputDark,
-        hintStyle: TextStyle(
-          color: Colors.grey[500],
+        hintStyle: const TextStyle(
+          color: textGrey,
           fontWeight: FontWeight.w600,
         ),
         border: OutlineInputBorder(

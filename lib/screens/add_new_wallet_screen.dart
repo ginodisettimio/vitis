@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
 
-class AddWalletAccountScreen extends StatelessWidget {
-  const AddWalletAccountScreen({super.key});
+class AddWalletScreen extends StatelessWidget {
+  const AddWalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

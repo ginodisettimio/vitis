@@ -11,10 +11,16 @@ class FormInput extends StatefulWidget {
   final String hint;
   final Type type;
   
+  // El estado y la acción son controlados estrictamente por el padre
+  final bool obscureText;
+  final VoidCallback? onToggleObscure;
+  
   const FormInput({
     required this.label,
     required this.hint,
     required this.type,
+    this.obscureText = false, // Por defecto falso para email y text
+    this.onToggleObscure,
     super.key,
   });
 
@@ -23,14 +29,7 @@ class FormInput extends StatefulWidget {
 }
 
 class _FormInputState extends State<FormInput> {
-  late bool _obscureText;
   String _currentValue = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _obscureText = widget.type == Type.password;
-  }
 
   String? get _errorText {
     if (_currentValue.isEmpty) return null;
@@ -55,6 +54,8 @@ class _FormInputState extends State<FormInput> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    final bool isObscure = widget.type == Type.password ? widget.obscureText : false;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -63,7 +64,7 @@ class _FormInputState extends State<FormInput> {
           style: TextStyle(
             fontSize: 13, 
             fontWeight: FontWeight.w700, 
-            color: theme.textTheme.displayLarge?.color ?? const Color(0xFF2D1B69),
+            color: theme.colorScheme.onSurface,
             letterSpacing: 1.2, 
           ),
         ),
@@ -71,7 +72,7 @@ class _FormInputState extends State<FormInput> {
         const SizedBox(height: 6), 
         
         TextField(
-          obscureText: _obscureText, 
+          obscureText: isObscure, 
           autocorrect: widget.type != Type.password,
           enableSuggestions: widget.type != Type.password,
           keyboardType: switch (widget.type) {
@@ -89,19 +90,16 @@ class _FormInputState extends State<FormInput> {
             errorText: _errorText, 
             suffixIcon: widget.type == Type.password
                 ? Padding(
-                  padding: const EdgeInsets.only(right: 5.0),
-                  child: IconButton(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: IconButton(
                       icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.grey,
+                        isObscure ? Icons.visibility_off : Icons.visibility,
+                        color: theme.textTheme.bodyMedium?.color, 
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
+                      // Disparamos la función directamente sin mutar estado local
+                      onPressed: widget.onToggleObscure,
                     ),
-                )
+                  )
                 : null,
           ),
         ),

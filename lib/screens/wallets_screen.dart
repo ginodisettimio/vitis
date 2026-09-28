@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/add_new_account_screen.dart';
+import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
 
-class MyAccountsScreen extends StatelessWidget {
-  const MyAccountsScreen({super.key});
+class MyWalletsScreen extends StatelessWidget {
+  const MyWalletsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -156,12 +156,7 @@ class MyAccountsScreen extends StatelessWidget {
   Widget _buildAddAccountButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const AddWalletAccountScreen(),
-          ),
-        );
+        Navigator.pushNamed(context, "/addwallet");
       },
       borderRadius: BorderRadius.circular(24),
       child: Container(

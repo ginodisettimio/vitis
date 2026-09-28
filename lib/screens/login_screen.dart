@@ -102,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                     // Iniciar Sesión
                     SizedBox(
                       height: 50,
-                      child: FormBtn(text: "Iniciar sesión", onPressed: () {}),
+                      child: FormBtn(text: "Iniciar sesión", onPressed: (() => Navigator.pushNamed(context, "/wallets"))),
                     ),
 
                     const Spacer(),
@@ -114,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                         Text("¿No tenés cuenta? ", style: theme.textTheme.bodyMedium),
                         GestureDetector(
                           onTap: () {
-                            // Navegar a registro
+                            Navigator.pushNamed(context, "/register");
                           },
                           child: Text(
                             "Registrate",
