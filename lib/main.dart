@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       home: const LoginScreen(),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       title: "Vitis",
     );
   }
