@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/forget_password_screen.dart';
 import 'package:vitis/screens/wallets_screen.dart';
 import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/screens/login_screen.dart';
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
       routes: {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
+        "/forgetpassword": (context) => ForgetPasswordScreen(),
         "/wallets": (context) => MyWalletsScreen(),
         "/addwallet": (context) => AddWalletScreen(),
       },

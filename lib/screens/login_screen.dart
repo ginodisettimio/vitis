@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0, bottom: 5),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushNamed(context, "/forgetpassword"),
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                             minimumSize: Size.zero,
@@ -102,7 +102,9 @@ class LoginScreen extends StatelessWidget {
                     // Iniciar Sesión
                     SizedBox(
                       height: 50,
-                      child: FormBtn(text: "Iniciar sesión", onPressed: (() => Navigator.pushNamed(context, "/wallets"))),
+                      child: FormBtn(text: "Iniciar sesión", 
+                      onPressed: () => Navigator.pushNamed(context, "/wallets")
+                      ),
                     ),
 
                     const Spacer(),

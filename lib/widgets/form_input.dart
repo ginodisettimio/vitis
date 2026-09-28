@@ -4,6 +4,7 @@ enum Type {
   email,
   password,
   text,
+  number,
 }
 
 class FormInput extends StatefulWidget {
@@ -78,6 +79,7 @@ class _FormInputState extends State<FormInput> {
           keyboardType: switch (widget.type) {
             Type.email => TextInputType.emailAddress,
             Type.text => TextInputType.text,
+            Type.number => TextInputType.number,
             Type.password => TextInputType.visiblePassword,
           },
           onChanged: (value) {
