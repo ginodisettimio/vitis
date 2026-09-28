@@ -124,7 +124,7 @@ class AddWalletAccountScreen extends StatelessWidget {
                     Text(
                       'ALIAS DE LA BILLETERA',
                       style: TextStyle(
-                        color: AppTheme.textDark.withOpacity(0.8),
+                        color: AppTheme.textDark.withValues(alpha: 0.8),
                         fontSize: 12,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0.5,
@@ -146,7 +146,7 @@ class AddWalletAccountScreen extends StatelessWidget {
                     Text(
                       'SELECCIONAR PROVEEDOR',
                       style: TextStyle(
-                        color: AppTheme.textDark.withOpacity(0.8),
+                        color: AppTheme.textDark.withValues(alpha: 0.8),
                         fontSize: 12,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0.5,

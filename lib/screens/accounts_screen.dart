@@ -137,7 +137,7 @@ class MyAccountsScreen extends StatelessWidget {
                       Text(
                         'Conectado',
                         style: TextStyle(
-                          color: AppTheme.success.withOpacity(0.9),
+                          color: AppTheme.success.withValues(alpha: 0.9),
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -169,7 +169,7 @@ class MyAccountsScreen extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: AppTheme.primary.withOpacity(0.4),
+            color: AppTheme.primary.withValues(alpha: 0.4),
             width: 1.5,
             style: BorderStyle.values[1], // Simula borde punteado (o usar paquete dotted_border)
           ),
