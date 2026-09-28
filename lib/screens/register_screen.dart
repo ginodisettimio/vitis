@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 import 'package:vitis/widgets/vitis_logo.dart';
+import 'package:vitis/utils/validator.dart'; 
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,6 +13,18 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscurePasswords = true;
+  
+  String _name = '';
+  String _email = '';
+  String _password = '';
+  String _confirmPassword = '';
+
+  bool get _isValid {
+    return _name.trim().isNotEmpty &&
+           Validator.isValidEmail(_email) &&
+           _password.length >= 8 &&
+           _password == _confirmPassword; 
+  }
 
   void _togglePasswordsVisibility() {
     setState(() {
@@ -36,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     const SizedBox(height: 12),
 
-                    // Header (Botón atrás + Textos)
+                    // Header 
                     Row(
                       children: [
                         Container(
@@ -68,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             Text(
                               "Completá tus datos para comenzar",
-                              style: theme.textTheme.bodyMedium, 
+                              style: theme.textTheme.bodyMedium,
                             ),
                           ],
                         ),
@@ -77,55 +90,80 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Logo
+                    // Logo 
                     const Center(child: VitisLogo(width: 130, height: 130)),
                     const SizedBox(height: 24),
 
                     // Formulario 
-                    const FormInput(
+                    FormInput(
                       label: "NOMBRE COMPLETO",
                       hint: "María González",
                       type: Type.text,
+                      onChanged: (value) {
+                        setState(() {
+                          _name = value;
+                        });
+                      },
                     ),
                     const SizedBox(height: 16),
-                    const FormInput(
+                    FormInput(
                       label: "CORREO ELECTRÓNICO",
                       hint: "tu@email.com",
                       type: Type.email,
+                      onChanged: (value) {
+                        setState(() {
+                          _email = value;
+                        });
+                      },
                     ),
                     const SizedBox(height: 16),
                     
-                    // Contraseñas
                     FormInput(
                       label: "CONTRASEÑA",
                       hint: "Mínimo 8 caracteres",
-                      type: .password,
+                      type: Type.password,
                       onToggleObscure: _togglePasswordsVisibility,
+                      onChanged: (value) {
+                        setState(() {
+                          _password = value;
+                        });
+                      },
                     ),
                     const SizedBox(height: 16),
                     FormInput(
                       label: "CONFIRMAR CONTRASEÑA",
                       hint: "Repetí tu contraseña",
-                      type: .password,
+                      type: Type.password,
                       onToggleObscure: _togglePasswordsVisibility,
+                      onChanged: (value) {
+                        setState(() {
+                          _confirmPassword = value;
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 32),
 
-                    // ─── Botón Crear Cuenta ────────────────────────────────────
-                    SizedBox(
-                      height: 50,
-                      child: FormBtn(
-                        text: "Crear cuenta",
-                        onPressed: () {
-                          // TODO: Lógica de registro
-                        },
+                    //  Botón Crear Cuenta 
+                    Opacity(
+                      opacity: _isValid ? 1.0 : 0.5,
+                      child: SizedBox(
+                        height: 50,
+                        child: FormBtn(
+                          text: "Crear cuenta",
+                          onPressed: () {
+                            if (_isValid) {
+                              // TODO: Lógica de registro
+                              () => Navigator.pop(context);
+                            }
+                          },
+                        ),
                       ),
                     ),
 
                     const Spacer(),
 
-                    // Footer (Iniciar sesión) 
+                    // Footer 
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
                       child: Row(

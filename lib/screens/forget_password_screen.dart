@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:vitis/utils/validator.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 
@@ -16,7 +17,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   int _countdown = 30;
   Timer? _timer;
 
-  // Lógica para iniciar o reiniciar la cuenta atrás
+  String _emailValue = '';
+  String _codeValue = '';
+
+  bool get _isEmailValid => Validator.isValidEmail(_emailValue);
+  bool get _canSendEmail => _isEmailValid && (!_isCodeSent || _isResendEnabled);
+  bool get _isCodeValid => _codeValue.trim().isNotEmpty;
+
   void _sendCode() {
     setState(() {
       _isCodeSent = true;
@@ -24,7 +31,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       _countdown = 30;
     });
 
-    _timer?.cancel(); // Cancelamos si ya existía un timer previo
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_countdown == 1) {
         setState(() {
@@ -41,7 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   void dispose() {
-    _timer?.cancel(); 
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -62,7 +69,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   children: [
                     const SizedBox(height: 12),
 
-                    // Header (Botón atrás + Textos)
+                    // Header
                     Row(
                       children: [
                         Container(
@@ -106,18 +113,22 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     const SizedBox(height: 32),
 
                     // Input Email 
-                    const FormInput(
+                    FormInput(
                       label: "CORREO ELECTRÓNICO",
                       hint: "tu@email.com",
                       type: Type.email,
+                      onChanged: (value) {
+                        setState(() {
+                          _emailValue = value;
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 24),
 
                     // Botón Enviar / Reenviar Código
-                    // Bajamos la opacidad si el código ya se envió y la cuenta atrás está activa
                     Opacity(
-                      opacity: (_isCodeSent && !_isResendEnabled) ? 0.5 : 1.0,
+                      opacity: _canSendEmail ? 1.0 : 0.5,
                       child: SizedBox(
                         height: 50,
                         child: FormBtn(
@@ -127,8 +138,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   ? "Reenviar código"
                                   : "Reenviar código ($_countdown s)"),
                           onPressed: () {
-                            // Solo permite disparar la acción si no se envió o si ya se habilitó el reenvío
-                            if (!_isCodeSent || _isResendEnabled) {
+                            if (_canSendEmail) {
                               _sendCode();
                             }
                           },
@@ -136,7 +146,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                     ),
 
-                    // Zona de Código (Aparece animada cuando _isCodeSent es true)
+                    // Zona de Código 
                     AnimatedSize(
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.easeInOut,
@@ -148,25 +158,34 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               children: [
                                 const SizedBox(height: 24),
                                 
-                                // Divider visual suave para separar las acciones
                                 Divider(color: theme.primaryColor.withValues(alpha: 0.1), thickness: 2),
                                 const SizedBox(height: 24),
 
-                                const FormInput(
+                                FormInput(
                                   label: "CÓDIGO DE VERIFICACIÓN",
                                   hint: "Ej. 123456",
-                                  type: .number, 
+                                  type: Type.text,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _codeValue = value;
+                                    });
+                                  },
                                 ),
                                 const SizedBox(height: 24),
                                 
                                 // Botón final de confirmación
-                                SizedBox(
-                                  height: 50,
-                                  child: FormBtn(
-                                    text: "Confirmar Código",
-                                    onPressed: () {
-                                      // TODO: Lógica de validación del código
-                                    },
+                                Opacity(
+                                  opacity: _isCodeValid ? 1.0 : 0.5,
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: FormBtn(
+                                      text: "Confirmar Código",
+                                      onPressed: () {
+                                        if (_isCodeValid) {
+                                          // TODO: Lógica de validación del código
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],

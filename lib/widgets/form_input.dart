@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/utils/validator.dart';
 
 enum Type {
   email,
@@ -12,16 +13,18 @@ class FormInput extends StatefulWidget {
   final String hint;
   final Type type;
   
-  // El estado y la acción son controlados estrictamente por el padre
   final bool obscureText;
   final VoidCallback? onToggleObscure;
+  
+  final ValueChanged<String>? onChanged;
   
   const FormInput({
     required this.label,
     required this.hint,
     required this.type,
-    this.obscureText = false, // Por defecto falso para email y text
+    this.obscureText = false, 
     this.onToggleObscure,
+    this.onChanged, 
     super.key,
   });
 
@@ -36,9 +39,8 @@ class _FormInputState extends State<FormInput> {
     if (_currentValue.isEmpty) return null;
 
     if (widget.type == Type.email) {
-      final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-      if (!emailRegex.hasMatch(_currentValue)) {
-        return 'Formato de correo inválido';
+      if (!Validator.isValidEmail(_currentValue)){
+         return 'Formato de correo inválido';
       }
     }
 
@@ -54,7 +56,6 @@ class _FormInputState extends State<FormInput> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final bool isObscure = widget.type == Type.password ? widget.obscureText : false;
 
     return Column(
@@ -86,6 +87,10 @@ class _FormInputState extends State<FormInput> {
             setState(() {
               _currentValue = value;
             });
+
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
           },
           decoration: InputDecoration(
             hintText: widget.hint,
@@ -98,7 +103,6 @@ class _FormInputState extends State<FormInput> {
                         isObscure ? Icons.visibility_off : Icons.visibility,
                         color: theme.textTheme.bodyMedium?.color, 
                       ),
-                      // Disparamos la función directamente sin mutar estado local
                       onPressed: widget.onToggleObscure,
                     ),
                   )

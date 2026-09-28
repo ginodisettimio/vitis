@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 import 'package:vitis/widgets/vitis_logo.dart';
+import 'package:vitis/utils/validator.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String _email = '';
+  String _password = '';
+
+  bool get _isValid => Validator.isValidEmail(_email) && _password.length >= 8;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +28,16 @@ class LoginScreen extends StatelessWidget {
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 12.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 12),
 
-                    // Header (Logo + Título)
+                    // Header
                     const Center(child: VitisLogo(width: 150, height: 150)),
                     const SizedBox(height: 8),
                     Padding(
@@ -59,27 +73,39 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     // Formulario
-                    const FormInput(
+                    FormInput(
                       label: "Usuario",
                       hint: "tu@email.com",
                       type: Type.email,
+                      onChanged: (value) {
+                        setState(() {
+                          _email = value;
+                        });
+                      },
                     ),
+
                     const SizedBox(height: 12),
-                    const FormInput(
+                    
+                    FormInput(
                       label: "Contraseña",
                       hint: "••••••••",
                       type: Type.password,
+                      onChanged: (value) {
+                        setState(() {
+                          _password = value;
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 4),
 
-                    // Olvidaste contraseña 
+                    // Olvidaste contraseña
                     Align(
                       alignment: Alignment.centerRight,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0, bottom: 5),
                         child: TextButton(
-                          onPressed: () => Navigator.pushNamed(context, "/forgetpassword"),
+                          onPressed: () {},
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                             minimumSize: Size.zero,
@@ -99,25 +125,35 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Iniciar Sesión
-                    SizedBox(
-                      height: 50,
-                      child: FormBtn(text: "Iniciar sesión", 
-                      onPressed: () => Navigator.pushNamed(context, "/wallets")
+                    // Botón Iniciar Sesión
+                    Opacity(
+                      opacity: _isValid ? 1.0 : 0.5,
+                      child: SizedBox(
+                        height: 50,
+                        child: FormBtn(
+                          text: "Iniciar sesión",
+                          onPressed: () {
+                            if (_isValid) {
+                              Navigator.pushNamed(context, "/wallets");
+                            }
+                          },
+                        ),
                       ),
                     ),
 
                     const Spacer(),
 
-                    // Footer (Registrate)
+                    // Footer
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("¿No tenés cuenta? ", style: theme.textTheme.bodyMedium),
+                        Text(
+                          "¿No tenés cuenta? ",
+                          style: theme.textTheme.bodyMedium,
+                        ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, "/register");
-                          },
+                          onTap: () =>
+                              Navigator.pushNamed(context, "/register"),
                           child: Text(
                             "Registrate",
                             style: TextStyle(
