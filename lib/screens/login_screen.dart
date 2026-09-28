@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/accounts_screen.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 import 'package:vitis/widgets/vitis_logo.dart';
@@ -98,10 +99,7 @@ class LoginScreen extends StatelessWidget {
               // ─── Botón Iniciar Sesión ────────────────────────────────────
               SizedBox(
                 height: 50,
-                child: FormBtn(
-                  text: "Iniciar sesión",
-                  onPressed: () {},
-                ),
+                child: FormBtn(text: "Iniciar sesión", onPressed: () {}),
               ),
 
               // ─── Espaciador flexible ─────────────────────────────────────
@@ -111,10 +109,7 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "¿No tenés cuenta? ",
-                    style: theme.textTheme.bodyMedium,
-                  ),
+                  Text("¿No tenés cuenta? ", style: theme.textTheme.bodyMedium),
                   GestureDetector(
                     onTap: () {
                       // Navegar a registro
