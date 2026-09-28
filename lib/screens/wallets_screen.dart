@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
 
 class MyWalletsScreen extends StatelessWidget {
