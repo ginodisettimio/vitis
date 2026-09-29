@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vitis/widgets/form_btn.dart';
 import 'package:vitis/widgets/form_input.dart';
 import 'package:vitis/widgets/vitis_logo.dart';
-import 'package:vitis/utils/validator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  bool get _isValid => Validator.isValidEmail(_email) && _password.length >= 8;
+  bool get _isValid => _email.isNotEmpty && _password.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _email = value;
                         });
                       },
+                      enableValidation: false,
                     ),
 
                     const SizedBox(height: 12),
@@ -104,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _password = value;
                         });
                       },
+                      enableValidation: false,
                     ),
 
                     const SizedBox(height: 4),

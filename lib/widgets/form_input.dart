@@ -12,10 +12,10 @@ class FormInput extends StatefulWidget {
   final String label;
   final String hint;
   final Type type;
-  
   final bool obscureText;
+  final bool enableValidation;
+
   final VoidCallback? onToggleObscure;
-  
   final ValueChanged<String>? onChanged;
   
   const FormInput({
@@ -25,6 +25,7 @@ class FormInput extends StatefulWidget {
     this.obscureText = false, 
     this.onToggleObscure,
     this.onChanged, 
+    this.enableValidation = true,
     super.key,
   });
 
@@ -36,8 +37,8 @@ class _FormInputState extends State<FormInput> {
   String _currentValue = '';
 
   String? get _errorText {
-    if (_currentValue.isEmpty) return null;
-
+    if (!widget.enableValidation || _currentValue.isEmpty) return null;
+    
     if (widget.type == Type.email) {
       if (!Validator.isValidEmail(_currentValue)){
          return 'Formato de correo inválido';
