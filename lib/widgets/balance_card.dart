@@ -41,7 +41,7 @@ class BalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'SALDO DISPONIBLE',
+            'RESERVA DISPONIBLE',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Colors.white70,
               fontSize: 12,
@@ -52,10 +52,8 @@ class BalanceCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             _money(availableBalance),
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              color: Colors.white,
-              fontSize: 28,
-            ),
+            style: Theme.of(context).textTheme.displayLarge
+                ?.copyWith(color: Colors.white, fontSize: 28),
           ),
           const SizedBox(height: 6),
           Text(
@@ -68,7 +66,9 @@ class BalanceCard extends StatelessWidget {
             children: [
               _Badge(text: '$syncedBanks bancos sincronizados'),
               const SizedBox(width: 8),
-              _Badge(text: '+${monthGrowthPercent.toStringAsFixed(1)}% este mes'),
+              _Badge(
+                text: '+${monthGrowthPercent.toStringAsFixed(1)}% este mes',
+              ),
             ],
           ),
         ],

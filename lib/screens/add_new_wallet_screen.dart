@@ -1,8 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
 
-class AddWalletScreen extends StatelessWidget {
+class AddWalletScreen extends StatefulWidget {
   const AddWalletScreen({super.key});
+
+  @override
+  State<AddWalletScreen> createState() => _AddWalletScreenState();
+}
+
+class _AddWalletScreenState extends State<AddWalletScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  String? _selectedProvider;
+
+  static const Map<String, String> _providers = {
+    'mp': 'Mercado Pago',
+    'nx': 'Naranja X',
+    'bn': 'Banco Nación',
+    'lm': 'Lemon',
+  };
+
+  bool get _isFormValid =>
+      _nameController.text.trim().isNotEmpty && _selectedProvider != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +164,7 @@ class AddWalletScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     TextField(
+                      controller: _nameController,
                       decoration: InputDecoration(
                         hintText: 'Ej. Mercado Pago Personal',
                         hintStyle: TextStyle(
@@ -164,33 +195,64 @@ class AddWalletScreen extends StatelessWidget {
                         color: theme.inputDecorationTheme.fillColor,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 40,
-                            height: 40,
-                            child: const Icon(
-                              Icons.credit_card_rounded,
-                              color: AppTheme.primary,
-                              size: 20,
-                            ),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Text(
-                              'Elegí una billetera',
-                              style: TextStyle(
-                                color: theme.hintColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          Icon(
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _selectedProvider,
+                          isExpanded: true,
+                          icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: theme.primaryColor,
                           ),
-                        ],
+                          hint: Text(
+                            'Elegí una billetera',
+                            style: TextStyle(
+                              color: theme.hintColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
+                          items: _providers.entries.map((entry) {
+                            return DropdownMenuItem<String>(
+                              value: entry.key,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 28,
+                                    height: 28,
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.bankColors[entry.key],
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        entry.key.toUpperCase(),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    entry.value,
+                                    style: TextStyle(
+                                      color: theme.textTheme.bodyLarge?.color,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedProvider = value;
+                            });
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 180),
@@ -221,12 +283,16 @@ class AddWalletScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // Acción para autorizar conexión
-                        },
+                        onPressed: _isFormValid
+                            ? () {
+                                Navigator.pushNamed(context, "/wallets");
+                              }
+                            : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.disabledColor, // Estado desactivado simulando la imagen
-                          foregroundColor: theme.highlightColor,
+                          backgroundColor: _isFormValid
+                              ? AppTheme.primary
+                              : theme.disabledColor,
+                          foregroundColor: Colors.white,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),

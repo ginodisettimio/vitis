@@ -28,7 +28,7 @@ class WalletMiniChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.inputLight),
+        border: Border.all(color: Theme.of(context).highlightColor),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ class WalletMiniChip extends StatelessWidget {
           Text(
             money,
             style: Theme.of(context).textTheme.bodyLarge
-                ?.copyWith(fontSize: 13),
+                ?.copyWith(fontSize: 13, color: AppTheme.primary),
           ),
         ],
       ),

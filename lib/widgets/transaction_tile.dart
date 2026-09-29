@@ -26,10 +26,8 @@ class TransactionTile extends StatelessWidget {
             radius: 18,
             backgroundColor: AppTheme.inputLight,
             child: Icon(
-              transaction.isIncome
-                  ? Icons.arrow_downward
-                  : Icons.arrow_upward,
-              color: AppTheme.primary,
+              transaction.isIncome ? Icons.arrow_downward : Icons.arrow_upward,
+              color: transaction.isIncome ? AppTheme.success : AppTheme.error,
               size: 16,
             ),
           ),
@@ -40,22 +38,24 @@ class TransactionTile extends StatelessWidget {
               children: [
                 Text(
                   transaction.title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
                 ),
                 Text(
                   transaction.date,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontSize: 11),
+                  style: Theme.of(context).textTheme.bodyMedium
+                      ?.copyWith(fontSize: 11),
                 ),
               ],
             ),
           ),
           Text(
             '$sign$amount',
-            style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13),
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w800,
+              fontSize: 13,
+            ),
           ),
         ],
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/screens/change_password_screen.dart';
+import 'package:vitis/screens/expenses_screen.dart';
+import 'package:vitis/screens/movements_screen.dart';
 import 'package:vitis/screens/forget_password_screen.dart';
 import 'package:vitis/screens/dashboard_screen.dart';
 import 'package:vitis/screens/new_saving_screen.dart';
@@ -36,7 +38,8 @@ class MainApp extends StatelessWidget {
         "/addwallet": (context) => AddWalletScreen(),
         "/newsaving": (context) => NewSavingScreen(),
         "/savings": (context) => SavingsScreen(),
-        
+        "/expenses": (context) => ExpensesScreen(),
+        "/movements": (context) => MovementsScreen(),
       },
     );
   }

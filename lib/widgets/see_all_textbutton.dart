@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/utils/app_theme.dart';
 
 class SeeAllTextButton extends StatelessWidget {
   final String route;
@@ -7,21 +8,24 @@ class SeeAllTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, route);
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(0, 0),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: Text(
-            'Ver todo',
-            style: theme.primaryTextTheme.bodySmall
-          ),
-        );
+      onPressed: () {
+        Navigator.pushNamed(context, route);
+      },
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+        minimumSize: const Size(0, 0),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        foregroundColor: AppTheme.primary,
+      ),
+      child: const Text(
+        'Ver todo',
+        style: TextStyle(
+          color: AppTheme.primary,
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
   }
 }

@@ -110,10 +110,8 @@ class DashboardScreen extends StatelessWidget {
               categories: MockDashboardData.categorySpending,
             ),
             const SizedBox(height: 20),
-            _SectionHeader(
-              title: 'Movimientos Recientes',
-              route: "/recent-moves",
-            ),
+            _SectionHeader(title: 'Movimientos Recientes', route: "/movements"),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
