@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class AppTheme {
   // Base
   static const Color textDark = Color(0xFF2D1B69);
-  static const Color textGrey = Color(0xFF757575);
-
+  static const Color textGrey = Color(0xFF757575); 
+  
   static const Color primary = Color(0xFF9B7EDE);
   static const Color primaryVariant = Color(0xFF7C5CBF);
   static const Color primaryDark = Color(0xFF5B3A9E);
-  static const Color primarySoft = Color(0x1A9B7EDE);
+  static const Color primarySoft = Color(0x1A9B7EDE); 
 
   static const Color bgLight = Color(0xFFF8F6FC);
   static const Color inputLight = Color(0xFFF5F0FF);
@@ -43,7 +43,6 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Nunito',
       brightness: Brightness.light,
       primaryColor: primary,
       scaffoldBackgroundColor: bgLight,
@@ -107,7 +106,6 @@ class AppTheme {
     // ... (El resto del darkTheme se mantiene igual)
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Nunito',
       brightness: Brightness.dark,
       primaryColor: primary,
       scaffoldBackgroundColor: bgDark,
@@ -134,9 +132,18 @@ class AppTheme {
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),
-        titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
-        bodyLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        bodyMedium: TextStyle(color: textGrey, fontWeight: FontWeight.w500),
+        titleLarge: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w900,
+        ),
+        bodyLarge: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+        ),
+        bodyMedium: TextStyle(
+          color: textGrey,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
