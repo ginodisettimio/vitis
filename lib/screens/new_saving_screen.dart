@@ -106,7 +106,7 @@ class _NewSavingScreenState extends State<NewSavingScreen> {
                   onPressed: _puedeContinuar ? _continuar : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: morado,
-                    disabledBackgroundColor: morado.withOpacity(0.4),
+                    disabledBackgroundColor: morado.withValues(alpha: 0.4),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     shape: RoundedRectangleBorder(
@@ -371,11 +371,11 @@ class _PasoFormulario extends StatelessWidget {
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: color.withOpacity(0.4)),
+              borderSide: BorderSide(color: color.withValues(alpha: 0.4)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: color.withOpacity(0.4)),
+              borderSide: BorderSide(color: color.withValues(alpha: 0.4)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),

@@ -201,7 +201,7 @@ class _TotalCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: const IconoBarril(color: Colors.white, size: 18),
@@ -266,7 +266,7 @@ class _ObjetivoCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -350,7 +350,7 @@ class _ObjetivoCard extends StatelessWidget {
                                   decoration: InputDecoration(
                                     hintText: 'Monto a retirar',
                                     filled: true,
-                                    fillColor: colorFondoIcono.withOpacity(0.5),
+                                    fillColor: colorFondoIcono.withValues(alpha: 0.5),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 14,
                                       vertical: 12,
@@ -412,7 +412,7 @@ class _BotonCrearAhorro extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.4), style: BorderStyle.solid),
+          border: Border.all(color: color.withValues(alpha: 0.4), style: BorderStyle.solid),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

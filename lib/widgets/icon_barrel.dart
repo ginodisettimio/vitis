@@ -50,7 +50,7 @@ class _BarrilPainter extends CustomPainter {
 
     // Aros del barril (arriba y abajo) en un tono más claro.
     final paintAro = Paint()
-      ..color = Colors.white.withOpacity(0.55)
+      ..color = Colors.white.withValues(alpha: 0.55)
       ..style = PaintingStyle.stroke
       ..strokeWidth = w * 0.06;
     canvas.drawLine(Offset(w * 0.10, h * 0.28), Offset(w * 0.90, h * 0.28), paintAro);
