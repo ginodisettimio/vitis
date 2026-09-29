@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
 
-class AccountCard extends StatelessWidget {
+class WalletCard extends StatelessWidget {
   final String bankKey;
   final String title;
 
-  const AccountCard({required this.bankKey, required this.title, super.key});
+  const WalletCard({required this.bankKey, required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {

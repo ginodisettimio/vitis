@@ -38,13 +38,13 @@ class MyWalletsScreen extends StatelessWidget {
               Expanded(
                 child: ListView(
                   children: [
-                    const AccountCard(bankKey: "mp", title: "Mercado Pago"),
+                    const WalletCard(bankKey: "mp", title: "Mercado Pago"),
                     const SizedBox(height: 14),
-                    const AccountCard(bankKey: "nx", title: "Naranja X"),
+                    const WalletCard(bankKey: "nx", title: "Naranja X"),
                     const SizedBox(height: 14),
-                    const AccountCard(bankKey: "bn", title: "Banco Nación"),
+                    const WalletCard(bankKey: "bn", title: "Banco Nación"),
                     const SizedBox(height: 14),
-                    const AccountCard(bankKey: "lm", title: "LemonCash"),
+                    const WalletCard(bankKey: "lm", title: "LemonCash"),
                     const SizedBox(height: 20),
 
                     // Botón de Agregar Billetera
