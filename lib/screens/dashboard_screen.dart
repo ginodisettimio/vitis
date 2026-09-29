@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
-import 'package:vitis/screens/expenses_screen.dart';
 import 'package:vitis/widgets/balance_card.dart';
 import 'package:vitis/widgets/category_spending_card.dart';
 import 'package:vitis/widgets/saving_goal_card.dart';
@@ -109,17 +108,12 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 20),
             CategorySpendingCard(
               categories: MockDashboardData.categorySpending,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => const ExpensesScreen(),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Movimientos Recientes', route: "/movements"),
+            _SectionHeader(
+              title: 'Movimientos Recientes',
+              route: "/recent-moves",
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(

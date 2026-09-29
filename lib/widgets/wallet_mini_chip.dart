@@ -48,9 +48,8 @@ class WalletMiniChip extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             money,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(fontSize: 13),
+            style: Theme.of(context).textTheme.bodyLarge
+                ?.copyWith(fontSize: 13),
           ),
         ],
       ),
