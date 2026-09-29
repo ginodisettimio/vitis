@@ -33,6 +33,9 @@ class MainApp extends StatelessWidget {
         "/dashboard": (context) => DashboardScreen(),
         "/wallets": (context) => MyWalletsScreen(),
         "/addwallet": (context) => AddWalletScreen(),
+        "/newsaving": (context) => CrearAhorroScreen(),
+        "/savings": (context) => MisAhorrosScreen(),
+        
       },
     );
   }
