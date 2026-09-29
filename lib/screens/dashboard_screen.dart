@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
+import 'package:vitis/screens/expenses_screen.dart';
 import 'package:vitis/widgets/balance_card.dart';
 import 'package:vitis/widgets/category_spending_card.dart';
 import 'package:vitis/widgets/saving_goal_card.dart';
@@ -16,8 +17,18 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final now = DateTime.now();
     const meses = [
-      'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
-      'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE',
+      'ENERO',
+      'FEBRERO',
+      'MARZO',
+      'ABRIL',
+      'MAYO',
+      'JUNIO',
+      'JULIO',
+      'AGOSTO',
+      'SEPTIEMBRE',
+      'OCTUBRE',
+      'NOVIEMBRE',
+      'DICIEMBRE',
     ];
     final monthLabel = meses[now.month - 1];
     final accounts = MockDashboardData.accountBalances;
@@ -40,8 +51,11 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Text(
                         monthLabel,
-                        style: Theme.of(context).textTheme.bodyMedium
-                            ?.copyWith(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 0.5),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
+                        ),
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -51,7 +65,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -62,7 +76,7 @@ class DashboardScreen extends StatelessWidget {
               monthGrowthPercent: MockDashboardData.monthGrowthPercent,
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Mis Ahorros', route: "/savings",),
+            _SectionHeader(title: 'Mis Ahorros', route: "/savings"),
             const SizedBox(height: 10),
             SizedBox(
               height: 128,
@@ -75,7 +89,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Mis cuentas', route: "/wallets",),
+            _SectionHeader(title: 'Mis cuentas', route: "/wallets"),
             const SizedBox(height: 10),
             SizedBox(
               height: 46,
@@ -85,14 +99,27 @@ class DashboardScreen extends StatelessWidget {
                 separatorBuilder: (_, _) => const SizedBox(width: 10),
                 itemBuilder: (context, i) {
                   final entry = accounts.entries.elementAt(i);
-                  return WalletMiniChip(bankKey: entry.key, balance: entry.value);
+                  return WalletMiniChip(
+                    bankKey: entry.key,
+                    balance: entry.value,
+                  );
                 },
               ),
             ),
             const SizedBox(height: 20),
-            CategorySpendingCard(categories: MockDashboardData.categorySpending),
+            CategorySpendingCard(
+              categories: MockDashboardData.categorySpending,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const ExpensesScreen(),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Movimientos Recientes', route: "/recent-moves",),
+            _SectionHeader(title: 'Movimientos Recientes', route: "/movements"),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
@@ -126,11 +153,10 @@ class _SectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyLarge?.copyWith(fontSize: 15, fontWeight: FontWeight.w800),
+          style: Theme.of(context).textTheme.bodyLarge
+              ?.copyWith(fontSize: 15, fontWeight: FontWeight.w800),
         ),
-        SeeAllTextButton(route: route,)
+        SeeAllTextButton(route: route),
       ],
     );
   }
