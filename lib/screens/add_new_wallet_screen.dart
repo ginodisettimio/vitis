@@ -6,6 +6,8 @@ class AddWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -14,7 +16,7 @@ class AddWalletScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -24,12 +26,12 @@ class AddWalletScreen extends StatelessWidget {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: AppTheme.inputLight,
+                      color: theme.cardTheme.color,
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.close, size: 20),
-                      color: AppTheme.primaryDark,
+                      color: theme.primaryColor,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -67,10 +69,10 @@ class AddWalletScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.cardColor,
                         borderRadius: BorderRadius.circular(24),
                         border: Border.all(
-                          color: const Color(0x99F5F0FF),
+                          color: theme.highlightColor,
                           width: 1,
                         ),
                       ),
@@ -80,12 +82,12 @@ class AddWalletScreen extends StatelessWidget {
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
-                              color: AppTheme.inputLight,
+                              color: theme.inputDecorationTheme.fillColor,
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.credit_card_rounded,
-                              color: AppTheme.primary,
+                              color: theme.iconTheme.color,
                               size: 24,
                             ),
                           ),
@@ -122,9 +124,9 @@ class AddWalletScreen extends StatelessWidget {
 
                     // Campo: Alias de la billetera
                     Text(
-                      'ALIAS DE LA BILLETERA',
+                      'NOMBRE DE LA BILLETERA',
                       style: TextStyle(
-                        color: AppTheme.textDark.withValues(alpha: 0.8),
+                        color: theme.textTheme.displayMedium?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0.5,
@@ -135,7 +137,7 @@ class AddWalletScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Ej. Mercado Pago Personal',
                         hintStyle: TextStyle(
-                          color: Colors.grey[400],
+                          color: theme.hintColor,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -146,7 +148,7 @@ class AddWalletScreen extends StatelessWidget {
                     Text(
                       'SELECCIONAR PROVEEDOR',
                       style: TextStyle(
-                        color: AppTheme.textDark.withValues(alpha: 0.8),
+                        color: theme.textTheme.displayMedium?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0.5,
@@ -159,18 +161,14 @@ class AddWalletScreen extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.inputLight,
+                        color: theme.inputDecorationTheme.fillColor,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 40,
                             height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
                             child: const Icon(
                               Icons.credit_card_rounded,
                               color: AppTheme.primary,
@@ -182,20 +180,20 @@ class AddWalletScreen extends StatelessWidget {
                             child: Text(
                               'Elegí una billetera',
                               style: TextStyle(
-                                color: Colors.grey[400],
+                                color: theme.hintColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14,
                               ),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.keyboard_arrow_down_rounded,
-                            color: AppTheme.primaryVariant,
+                            color: theme.primaryColor,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 180),
 
                     // Texto de seguridad inferior
                     Row(
@@ -204,13 +202,13 @@ class AddWalletScreen extends StatelessWidget {
                         Icon(
                           Icons.lock_outline_rounded,
                           size: 14,
-                          color: Colors.grey[400],
+                          color: theme.highlightColor,
                         ),
                         const SizedBox(width: 6),
                         Text(
                           'Tus datos están protegidos y encriptados',
                           style: TextStyle(
-                            color: Colors.grey[400],
+                            color: theme.highlightColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
@@ -227,8 +225,8 @@ class AddWalletScreen extends StatelessWidget {
                           // Acción para autorizar conexión
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[300], // Estado desactivado simulando la imagen
-                          foregroundColor: Colors.grey[600],
+                          backgroundColor: theme.disabledColor, // Estado desactivado simulando la imagen
+                          foregroundColor: theme.highlightColor,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
