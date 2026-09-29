@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: "Iniciar sesión",
                           onPressed: () {
                             if (_isValid) {
-                              Navigator.pushNamed(context, "/wallets");
+                              Navigator.pushNamed(context, "/dashboard");
                             }
                           },
                         ),
