@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vitis/screens/change_password_screen.dart';
 import 'package:vitis/screens/forget_password_screen.dart';
 import 'package:vitis/screens/dashboard_screen.dart';
+import 'package:vitis/screens/new_saving_screen.dart';
+import 'package:vitis/screens/savings_screen.dart';
 import 'package:vitis/screens/wallets_screen.dart';
 import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/screens/login_screen.dart';
@@ -19,7 +21,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // TODO: Cambiar Home si esta logueado a "Dashboard"
       home: const LoginScreen(),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -33,8 +34,8 @@ class MainApp extends StatelessWidget {
         "/dashboard": (context) => DashboardScreen(),
         "/wallets": (context) => MyWalletsScreen(),
         "/addwallet": (context) => AddWalletScreen(),
-        "/newsaving": (context) => CrearAhorroScreen(),
-        "/savings": (context) => MisAhorrosScreen(),
+        "/newsaving": (context) => NewSavingScreen(),
+        "/savings": (context) => SavingsScreen(),
         
       },
     );

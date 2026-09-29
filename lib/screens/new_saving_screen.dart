@@ -3,14 +3,14 @@ import '../utils/app_theme.dart';
 import '../models/saving_target.dart';
 import '../widgets/icon_barrel.dart';
 
-class CrearAhorroScreen extends StatefulWidget {
-  const CrearAhorroScreen({super.key});
+class NewSavingScreen extends StatefulWidget {
+  const NewSavingScreen({super.key});
 
   @override
-  State<CrearAhorroScreen> createState() => _CrearAhorroScreenState();
+  State<NewSavingScreen> createState() => _NewSavingScreenState();
 }
 
-class _CrearAhorroScreenState extends State<CrearAhorroScreen> {
+class _NewSavingScreenState extends State<NewSavingScreen> {
   static const Color morado = AppTheme.primary;
   static const Color moradoClaro = AppTheme.inputLight;
   static const List<String> pasos = ['Nombre', 'Meta', 'Reserva'];

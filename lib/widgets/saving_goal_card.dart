@@ -24,7 +24,7 @@ class SavingGoalCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppTheme.inputLight),
+        border: Border.all(color: Theme.of(context).highlightColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class SavingGoalCard extends StatelessWidget {
               value: goal.progress,
               minHeight: 6,
               backgroundColor: AppTheme.inputLight,
-              color: AppTheme.primary,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           const SizedBox(height: 4),

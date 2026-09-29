@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
-import 'package:vitis/utils/app_theme.dart';
 import 'package:vitis/widgets/balance_card.dart';
 import 'package:vitis/widgets/category_spending_card.dart';
 import 'package:vitis/widgets/saving_goal_card.dart';
+import 'package:vitis/widgets/see_all_textbutton.dart';
 import 'package:vitis/widgets/transaction_tile.dart';
 import 'package:vitis/widgets/wallet_mini_chip.dart';
 
@@ -51,11 +51,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.settings_outlined, color: AppTheme.textDark),
-                ),
+                )
               ],
             ),
             const SizedBox(height: 16),
@@ -66,7 +62,7 @@ class DashboardScreen extends StatelessWidget {
               monthGrowthPercent: MockDashboardData.monthGrowthPercent,
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Mis Ahorros'),
+            _SectionHeader(title: 'Mis Ahorros', route: "/savings",),
             const SizedBox(height: 10),
             SizedBox(
               height: 128,
@@ -79,7 +75,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Mis cuentas'),
+            _SectionHeader(title: 'Mis cuentas', route: "/wallets",),
             const SizedBox(height: 10),
             SizedBox(
               height: 46,
@@ -96,13 +92,13 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 20),
             CategorySpendingCard(categories: MockDashboardData.categorySpending),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Movimientos Recientes'),
+            _SectionHeader(title: 'Movimientos Recientes', route: "/recent-moves",),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardTheme.color,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppTheme.inputLight),
+                border: Border.all(color: Theme.of(context).highlightColor),
               ),
               child: Column(
                 children: MockDashboardData.recentTransactions
@@ -119,8 +115,9 @@ class DashboardScreen extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   final String title;
+  final String route;
 
-  const _SectionHeader({required this.title});
+  const _SectionHeader({required this.title, required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -133,18 +130,7 @@ class _SectionHeader extends StatelessWidget {
             context,
           ).textTheme.bodyLarge?.copyWith(fontSize: 15, fontWeight: FontWeight.w800),
         ),
-        TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(0, 0),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: const Text(
-            'Ver todo',
-            style: TextStyle(color: AppTheme.primary, fontSize: 12),
-          ),
-        ),
+        SeeAllTextButton(route: route,)
       ],
     );
   }

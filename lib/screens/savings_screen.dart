@@ -4,14 +4,14 @@ import '../models/saving_target.dart';
 import '../widgets/icon_barrel.dart';
 import 'new_saving_screen.dart';
 
-class MisAhorrosScreen extends StatefulWidget {
-  const MisAhorrosScreen({super.key});
+class SavingsScreen extends StatefulWidget {
+  const SavingsScreen({super.key});
 
   @override
-  State<MisAhorrosScreen> createState() => _MisAhorrosScreenState();
+  State<SavingsScreen> createState() => _SavingsScreenState();
 }
 
-class _MisAhorrosScreenState extends State<MisAhorrosScreen> {
+class _SavingsScreenState extends State<SavingsScreen> {
   // Datos de ejemplo — reemplazá esto por tu fuente real (API, base local, etc.)
   // Ya no es const: ahora es una lista mutable para poder agregar objetivos nuevos.
   final List<ObjetivoAhorro> objetivos = [
@@ -67,7 +67,7 @@ class _MisAhorrosScreenState extends State<MisAhorrosScreen> {
 
   Future<void> _abrirCrearAhorro() async {
     final nuevoObjetivo = await Navigator.of(context).push<ObjetivoAhorro>(
-      MaterialPageRoute(builder: (_) => const CrearAhorroScreen()),
+      MaterialPageRoute(builder: (_) => const NewSavingScreen()),
     );
     if (nuevoObjetivo != null) {
       setState(() {
