@@ -52,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Vitis",
                         style: theme.textTheme.displayLarge?.copyWith(
                           fontSize: 32,
-                          fontFamily: 'Nunito',
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -92,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 12),
-                    
+
                     FormInput(
                       label: "Contraseña",
                       hint: "••••••••",
@@ -115,7 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0, bottom: 5),
                         child: TextButton(
-                          onPressed: () => Navigator.pushNamed(context, "/forgetpassword"),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/forgetpassword"),
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                             minimumSize: Size.zero,

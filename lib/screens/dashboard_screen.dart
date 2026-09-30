@@ -3,7 +3,7 @@ import 'package:vitis/models/dashboard_models.dart';
 import 'package:vitis/widgets/balance_card.dart';
 import 'package:vitis/widgets/category_spending_card.dart';
 import 'package:vitis/widgets/saving_goal_card.dart';
-import 'package:vitis/widgets/see_all_textbutton.dart';
+import 'package:vitis/widgets/see_all_text_button.dart';
 import 'package:vitis/widgets/transaction_tile.dart';
 import 'package:vitis/widgets/wallet_mini_chip.dart';
 

@@ -44,6 +44,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: 'Nunito',
       primaryColor: primary,
       scaffoldBackgroundColor: bgLight,
       colorScheme: const ColorScheme.light(
@@ -107,6 +108,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
+      fontFamily: 'Nunito',
       primaryColor: primary,
       scaffoldBackgroundColor: bgDark,
       colorScheme: const ColorScheme.dark(
