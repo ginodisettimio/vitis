@@ -6,6 +6,7 @@ import 'package:vitis/screens/forget_password_screen.dart';
 import 'package:vitis/screens/dashboard_screen.dart';
 import 'package:vitis/screens/new_saving_screen.dart';
 import 'package:vitis/screens/savings_screen.dart';
+import 'package:vitis/screens/settings_screen.dart';
 import 'package:vitis/screens/wallets_screen.dart';
 import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/screens/login_screen.dart';
@@ -40,6 +41,7 @@ class MainApp extends StatelessWidget {
         "/savings": (context) => SavingsScreen(),
         "/expenses": (context) => ExpensesScreen(),
         "/movements": (context) => MovementsScreen(),
+        "/settings": (context) => SettingsScreen(),
       },
     );
   }

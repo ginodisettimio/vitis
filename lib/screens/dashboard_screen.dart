@@ -57,10 +57,13 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      Text(
-                        'Hola, $userName 👋',
-                        style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(fontSize: 20),
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(context, "/settings"),
+                        child: Text(
+                          'Hola, $userName 👋',
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(fontSize: 20),
+                        ),
                       ),
                     ],
                   ),
