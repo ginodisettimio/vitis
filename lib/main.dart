@@ -31,13 +31,13 @@ class MainApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         "/forgetpassword": (context) => ForgetPasswordScreen(),
         "/changepassword": (context) => ChangePasswordScreen(),
+        "/addwallet": (context) => AddWalletScreen(),
+        "/expenses": (context) => ExpensesScreen(),
+        "/movements": (context) => MovementsScreen(),
         "/dashboard": (context) => MainShellScreen(inicial: NavSection.inicio),
         "/wallets": (context) =>
             MainShellScreen(inicial: NavSection.billeteras),
-        "/addwallet": (context) => AddWalletScreen(),
         "/savings": (context) => MainShellScreen(inicial: NavSection.ahorro),
-        "/expenses": (context) => ExpensesScreen(),
-        "/movements": (context) => MovementsScreen(),
         "/settings": (context) => MainShellScreen(inicial: NavSection.ajustes),
       },
     );

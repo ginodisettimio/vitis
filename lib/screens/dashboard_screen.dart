@@ -94,7 +94,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            _SectionHeader(title: 'Mis cuentas', route: "/wallets"),
+            _SectionHeader(title: 'Mis Billeteras', route: "/wallets"),
             const SizedBox(height: 10),
             SizedBox(
               height: 46,
