@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/screens/main_shell_screen.dart';
-import 'package:vitis/screens/new_saving_screen.dart';
 import 'package:vitis/widgets/icon_barrel.dart';
 
 // El orden del enum es el orden de las secciones en MainShellScreen.
@@ -81,18 +80,11 @@ class AppBottomNavBar extends StatelessWidget {
 
 // Botón central "+" que se encastra en el hueco de AppBottomNavBar.
 // Usar junto con floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked.
-// Sin onPressed, abre la pantalla de nuevo ahorro y, al crearlo, muestra la sección Ahorro.
+// Sin onPressed, abre la pantalla de nuevo registro (ingreso / salida).
 class AppFab extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const AppFab({super.key, this.onPressed});
-
-  Future<void> _crearAhorro(BuildContext context) async {
-    final creado = await NewSavingScreen.abrir(context);
-    if (creado && context.mounted) {
-      MainShellScreen.irA(context, NavSection.ahorro);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +94,8 @@ class AppFab extends StatelessWidget {
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       shape: const CircleBorder(),
-      onPressed: onPressed ?? () => _crearAhorro(context),
+      onPressed:
+          onPressed ?? () => Navigator.pushNamed(context, '/cashregister'),
       child: const Icon(Icons.add, size: 28),
     );
   }

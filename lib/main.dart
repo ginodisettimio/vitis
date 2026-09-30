@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/cash_register_screen.dart';
 import 'package:vitis/screens/change_password_screen.dart';
 import 'package:vitis/screens/expenses_screen.dart';
 import 'package:vitis/screens/movements_screen.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
         "/addwallet": (context) => AddWalletScreen(),
         "/expenses": (context) => ExpensesScreen(),
         "/movements": (context) => MovementsScreen(),
+        "/cashregister": (context) => CashRegisterScreen(),
         "/dashboard": (context) => MainShellScreen(inicial: NavSection.inicio),
         "/wallets": (context) =>
             MainShellScreen(inicial: NavSection.billeteras),
