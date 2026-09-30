@@ -27,7 +27,7 @@ class AddWalletButton extends StatelessWidget {
               Icon(Icons.add, color: AppTheme.primary, size: 20),
               SizedBox(width: 8),
               Text(
-                'Agregar cuenta',
+                'Agregar billetera',
                 style: TextStyle(
                   color: AppTheme.primary,
                   fontWeight: FontWeight.w700,

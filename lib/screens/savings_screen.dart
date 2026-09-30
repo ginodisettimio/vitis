@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/saving_target.dart';
+import '../models/savings_store.dart';
 import '../utils/money_formatter.dart';
-import '../widgets/app_bottom_nav_bar.dart';
 import '../widgets/icon_barrel.dart';
 import '../widgets/outlined_add_button.dart';
 import '../widgets/saving_target_card.dart';
@@ -18,20 +17,7 @@ class SavingsScreen extends StatefulWidget {
 }
 
 class _SavingsScreenState extends State<SavingsScreen> {
-  // Datos de ejemplo — reemplazá esto por tu fuente real (API, base local, etc.)
-  // Ya no es const: ahora es una lista mutable para poder agregar objetivos nuevos.
-  final List<ObjetivoAhorro> objetivos = [
-    const ObjetivoAhorro(
-      titulo: 'Viaje a Bariloche',
-      montoActual: 45000,
-      montoObjetivo: 150000,
-    ),
-    const ObjetivoAhorro(
-      titulo: 'Fondo de emergencia',
-      montoActual: 80000,
-      montoObjetivo: 200000,
-    ),
-  ];
+  final SavingsStore _store = SavingsStore.instancia;
 
   // Índice del objetivo actualmente desplegado (null = ninguno).
   int? _indiceExpandido;
@@ -63,7 +49,7 @@ class _SavingsScreenState extends State<SavingsScreen> {
 
     // TODO: acá conectás la lógica real de retiro (API, base local, etc.)
     debugPrint(
-      'Retirar \$${monto.toStringAsFixed(2)} de ${objetivos[index].titulo}',
+      'Retirar \$${monto.toStringAsFixed(2)} de ${_store.objetivos[index].titulo}',
     );
 
     setState(() {
@@ -72,69 +58,55 @@ class _SavingsScreenState extends State<SavingsScreen> {
     });
   }
 
-  Future<void> _abrirCrearAhorro() async {
-    final nuevoObjetivo = await Navigator.of(context).push<ObjetivoAhorro>(
-      MaterialPageRoute(builder: (_) => const NewSavingScreen()),
-    );
-    if (nuevoObjetivo != null) {
-      setState(() {
-        objetivos.add(nuevoObjetivo);
-      });
-    }
-  }
-
-  double get totalAhorrado =>
-      objetivos.fold(0, (sum, o) => sum + o.montoActual);
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ScreenHeader(
-                icon: IconoBarril(color: theme.colorScheme.primary, size: 22),
-                title: 'Mis Ahorros',
-                subtitle:
-                    '${objetivos.length} objetivos · ${formatearMonto(totalAhorrado)} reservados',
-              ),
-              const SizedBox(height: 20),
-              SavingsTotalCard(monto: formatearMonto(totalAhorrado)),
-              const SizedBox(height: 20),
-              ...List.generate(objetivos.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: SavingTargetCard(
-                    objetivo: objetivos[index],
-                    expandido: _indiceExpandido == index,
-                    onTap: () => _toggleExpandido(index),
-                    montoController: _montoController,
-                    onRetirar: () => _retirar(index),
+        // Se redibuja cuando se agrega un ahorro (desde acá o desde el "+").
+        child: ListenableBuilder(
+          listenable: _store,
+          builder: (context, _) {
+            final objetivos = _store.objetivos;
+            final total = _store.totalAhorrado;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ScreenHeader(
+                    icon: IconoBarril(color: theme.colorScheme.primary, size: 22),
+                    title: 'Mis Ahorros',
+                    subtitle:
+                        '${objetivos.length} objetivos · ${formatearMonto(total)} reservados',
                   ),
-                );
-              }),
-              OutlinedAddButton(
-                text: 'Crear nuevo ahorro',
-                onTap: _abrirCrearAhorro,
+                  const SizedBox(height: 20),
+                  SavingsTotalCard(monto: formatearMonto(total)),
+                  const SizedBox(height: 20),
+                  ...List.generate(objetivos.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: SavingTargetCard(
+                        objetivo: objetivos[index],
+                        expandido: _indiceExpandido == index,
+                        onTap: () => _toggleExpandido(index),
+                        montoController: _montoController,
+                        onRetirar: () => _retirar(index),
+                      ),
+                    );
+                  }),
+                  OutlinedAddButton(
+                    text: 'Crear nuevo ahorro',
+                    onTap: () => NewSavingScreen.abrir(context),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.onPrimary,
-        shape: const CircleBorder(),
-        onPressed: _abrirCrearAhorro,
-        child: const Icon(Icons.add, size: 28),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const AppBottomNavBar(activa: NavSection.ahorro),
     );
   }
 }

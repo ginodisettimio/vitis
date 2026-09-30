@@ -18,17 +18,41 @@ class ExpensesScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Título principal y subtítulo
-              Text(
-                'Gastos por Categoría',
-                style: Theme.of(context).textTheme.displayLarge
-                    ?.copyWith(fontSize: 26),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Agosto 2024',
-                style: Theme.of(context).textTheme.bodyMedium
-                    ?.copyWith(fontSize: 14),
+              // Encabezado con botón de retroceso, título y subtítulo
+              Row(
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).canvasColor,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+                      color: AppTheme.primaryDark,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Gastos por Categoría',
+                        style: Theme.of(context).textTheme.titleLarge
+                            ?.copyWith(fontSize: 20),
+                      ),
+                      Text(
+                        'Septiembre 2025',
+                        style: Theme.of(context).textTheme.bodyMedium
+                            ?.copyWith(fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
 

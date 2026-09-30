@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/saving_target.dart';
+import '../models/savings_store.dart';
 import '../widgets/icon_barrel.dart';
 import '../widgets/step_progress_bar.dart';
 import '../widgets/step_tabs.dart';
@@ -10,6 +11,17 @@ import '../widgets/wizard_step_form.dart';
 
 class NewSavingScreen extends StatefulWidget {
   const NewSavingScreen({super.key});
+
+  // Abre el flujo de creación y guarda el objetivo en SavingsStore.
+  // Devuelve true si se creó un ahorro.
+  static Future<bool> abrir(BuildContext context) async {
+    final nuevoObjetivo = await Navigator.of(context).push<ObjetivoAhorro>(
+      MaterialPageRoute(builder: (_) => const NewSavingScreen()),
+    );
+    if (nuevoObjetivo == null) return false;
+    SavingsStore.instancia.agregar(nuevoObjetivo);
+    return true;
+  }
 
   @override
   State<NewSavingScreen> createState() => _NewSavingScreenState();

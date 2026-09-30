@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/main_shell_screen.dart';
+import 'package:vitis/widgets/app_bottom_nav_bar.dart';
 import 'package:vitis/utils/app_theme.dart';
 
 class AddWalletScreen extends StatefulWidget {
@@ -285,7 +287,10 @@ class _AddWalletScreenState extends State<AddWalletScreen> {
                       child: ElevatedButton(
                         onPressed: _isFormValid
                             ? () {
-                                Navigator.pushNamed(context, "/wallets");
+                                MainShellScreen.irA(
+                                  context,
+                                  NavSection.billeteras,
+                                );
                               }
                             : null,
                         style: ElevatedButton.styleFrom(

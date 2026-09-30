@@ -3,15 +3,12 @@ import 'package:vitis/screens/change_password_screen.dart';
 import 'package:vitis/screens/expenses_screen.dart';
 import 'package:vitis/screens/movements_screen.dart';
 import 'package:vitis/screens/forget_password_screen.dart';
-import 'package:vitis/screens/dashboard_screen.dart';
-import 'package:vitis/screens/new_saving_screen.dart';
-import 'package:vitis/screens/savings_screen.dart';
-import 'package:vitis/screens/settings_screen.dart';
-import 'package:vitis/screens/wallets_screen.dart';
+import 'package:vitis/screens/main_shell_screen.dart';
 import 'package:vitis/screens/add_new_wallet_screen.dart';
 import 'package:vitis/screens/login_screen.dart';
 import 'package:vitis/screens/register_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/widgets/app_bottom_nav_bar.dart';
 
 void main() {
   runApp(const MainApp());
@@ -34,14 +31,14 @@ class MainApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         "/forgetpassword": (context) => ForgetPasswordScreen(),
         "/changepassword": (context) => ChangePasswordScreen(),
-        "/dashboard": (context) => DashboardScreen(),
-        "/wallets": (context) => MyWalletsScreen(),
+        "/dashboard": (context) => MainShellScreen(inicial: NavSection.inicio),
+        "/wallets": (context) =>
+            MainShellScreen(inicial: NavSection.billeteras),
         "/addwallet": (context) => AddWalletScreen(),
-        "/newsaving": (context) => NewSavingScreen(),
-        "/savings": (context) => SavingsScreen(),
+        "/savings": (context) => MainShellScreen(inicial: NavSection.ahorro),
         "/expenses": (context) => ExpensesScreen(),
         "/movements": (context) => MovementsScreen(),
-        "/settings": (context) => SettingsScreen(),
+        "/settings": (context) => MainShellScreen(inicial: NavSection.ajustes),
       },
     );
   }

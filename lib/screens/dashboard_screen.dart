@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
+import 'package:vitis/screens/main_shell_screen.dart';
+import 'package:vitis/widgets/app_bottom_nav_bar.dart';
 import 'package:vitis/widgets/balance_card.dart';
 import 'package:vitis/widgets/category_spending_card.dart';
 import 'package:vitis/widgets/saving_goal_card.dart';
@@ -58,7 +60,8 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, "/settings"),
+                        onTap: () =>
+                            MainShellScreen.irA(context, NavSection.ajustes),
                         child: Text(
                           'Hola, $userName 👋',
                           style: Theme.of(context).textTheme.displayLarge

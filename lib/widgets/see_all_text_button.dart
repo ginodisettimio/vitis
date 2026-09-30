@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/screens/main_shell_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/widgets/app_bottom_nav_bar.dart';
 
 class SeeAllTextButton extends StatelessWidget {
   final String route;
@@ -10,7 +12,13 @@ class SeeAllTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, route);
+        // Si la ruta es una sección de la barra, se cambia de sección en el contenedor.
+        final seccion = NavSection.deRuta(route);
+        if (seccion != null) {
+          MainShellScreen.irA(context, seccion);
+        } else {
+          Navigator.pushNamed(context, route);
+        }
       },
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,

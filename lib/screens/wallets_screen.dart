@@ -21,7 +21,7 @@ class MyWalletsScreen extends StatelessWidget {
             children: [
               // Título principal
               Text(
-                'Mis cuentas',
+                'Mis Billeteras',
                 style: Theme.of(context).textTheme.displayLarge
                     ?.copyWith(fontSize: 26, fontWeight: FontWeight.w900),
               ),
