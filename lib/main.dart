@@ -20,28 +20,33 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      title: "Vitis",
-      routes: {
-        "/login": (context) => LoginScreen(),
-        "/register": (context) => RegisterScreen(),
-        "/forgetpassword": (context) => ForgetPasswordScreen(),
-        "/changepassword": (context) => ChangePasswordScreen(),
-        "/addwallet": (context) => AddWalletScreen(),
-        "/expenses": (context) => ExpensesScreen(),
-        "/movements": (context) => MovementsScreen(),
-        "/cashregister": (context) => CashRegisterScreen(),
-        "/dashboard": (context) => MainShellScreen(inicial: NavSection.inicio),
-        "/wallets": (context) =>
-            MainShellScreen(inicial: NavSection.billeteras),
-        "/savings": (context) => MainShellScreen(inicial: NavSection.ahorro),
-        "/settings": (context) => MainShellScreen(inicial: NavSection.ajustes),
-      },
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: AppTheme.themeMode,
+      builder: (context, themeMode, _) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const LoginScreen(),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: themeMode,
+        title: "Vitis",
+        routes: {
+          "/login": (context) => LoginScreen(),
+          "/register": (context) => RegisterScreen(),
+          "/forgetpassword": (context) => ForgetPasswordScreen(),
+          "/changepassword": (context) => ChangePasswordScreen(),
+          "/addwallet": (context) => AddWalletScreen(),
+          "/expenses": (context) => ExpensesScreen(),
+          "/movements": (context) => MovementsScreen(),
+          "/cashregister": (context) => CashRegisterScreen(),
+          "/dashboard": (context) =>
+              MainShellScreen(inicial: NavSection.inicio),
+          "/wallets": (context) =>
+              MainShellScreen(inicial: NavSection.billeteras),
+          "/savings": (context) => MainShellScreen(inicial: NavSection.ahorro),
+          "/settings": (context) =>
+              MainShellScreen(inicial: NavSection.ajustes),
+        },
+      ),
     );
   }
 }

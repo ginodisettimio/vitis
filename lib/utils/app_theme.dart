@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class AppTheme {
   // Base
   static const Color textDark = Color(0xFF2D1B69);
-  static const Color textGrey = Color(0xFF757575); 
-  
+  static const Color textGrey = Color(0xFF757575);
+
   static const Color primary = Color(0xFF9B7EDE);
   static const Color primaryVariant = Color(0xFF7C5CBF);
   static const Color primaryDark = Color(0xFF5B3A9E);
-  static const Color primarySoft = Color(0x1A9B7EDE); 
+  static const Color primarySoft = Color(0x1A9B7EDE);
 
   static const Color bgLight = Color(0xFFF8F6FC);
   static const Color inputLight = Color(0xFFF5F0FF);
@@ -39,12 +39,25 @@ class AppTheme {
     'lm': Color(0xFF7DC900),
   };
 
-  // LightTheme
+  // Modo de tema actual. MainApp lo escucha para redibujar MaterialApp.
+  static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(
+    ThemeMode.system,
+  );
+
+  static void changeTheme(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    themeMode.value = isDark ? ThemeMode.light : ThemeMode.dark;
+  }
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: 'Nunito',
+      // Flotante: no empuja hacia arriba el FAB de la barra inferior.
+      snackBarTheme: const SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+      ),
       primaryColor: primary,
       scaffoldBackgroundColor: bgLight,
       colorScheme: const ColorScheme.light(
@@ -102,9 +115,7 @@ class AppTheme {
     );
   }
 
-  // DarkTheme
   static ThemeData get darkTheme {
-    // ... (El resto del darkTheme se mantiene igual)
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -134,18 +145,9 @@ class AppTheme {
           color: Colors.white,
           fontWeight: FontWeight.w900,
         ),
-        titleLarge: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w900,
-        ),
-        bodyLarge: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-        ),
-        bodyMedium: TextStyle(
-          color: textGrey,
-          fontWeight: FontWeight.w500,
-        ),
+        titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
+        bodyLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        bodyMedium: TextStyle(color: textGrey, fontWeight: FontWeight.w500),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
