@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/screens/main_shell_screen.dart';
 import 'package:vitis/widgets/icon_barrel.dart';
+import 'package:vitis/widgets/icon_grape.dart';
 
 // El orden del enum es el orden de las secciones en MainShellScreen.
 enum NavSection {
@@ -47,7 +48,7 @@ class AppBottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _NavItem(
-              icon: Icons.eco_outlined,
+              iconWidget: const IconoUva(),
               label: 'Inicio',
               activo: activa == NavSection.inicio,
               onTap: () => _ir(context, NavSection.inicio),
@@ -60,7 +61,7 @@ class AppBottomNavBar extends StatelessWidget {
             ),
             const SizedBox(width: 40), // espacio para el FAB
             _NavItem(
-              esBarril: true,
+              iconWidget: const IconoBarril(),
               label: 'Ahorro',
               activo: activa == NavSection.ahorro,
               onTap: () => _ir(context, NavSection.ahorro),
@@ -101,20 +102,28 @@ class AppFab extends StatelessWidget {
   }
 }
 
+// Ítem de la barra. Recibe un IconData (icon) o un widget propio (iconWidget),
+// uno de los dos. El color activo/inactivo y el tamaño llegan por IconTheme:
+// los widgets propios tienen que tomarlos de ahí (como IconoBarril e IconoUva).
 class _NavItem extends StatelessWidget {
-  final IconData? icon; // Para íconos estándar de Material.
-  final bool esBarril; // Para usar el IconoBarril dibujado a mano.
+  static const double _iconSize = 22;
+
+  final IconData? icon;
+  final Widget? iconWidget;
   final String label;
   final bool activo;
   final VoidCallback onTap;
 
   const _NavItem({
     this.icon,
-    this.esBarril = false,
+    this.iconWidget,
     required this.label,
     required this.activo,
     required this.onTap,
-  });
+  }) : assert(
+         (icon == null) != (iconWidget == null),
+         'Pasá icon o iconWidget, uno solo',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -131,9 +140,10 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            esBarril
-                ? IconoBarril(color: c, size: 22)
-                : Icon(icon, color: c, size: 22),
+            IconTheme(
+              data: IconThemeData(color: c, size: _iconSize),
+              child: iconWidget ?? Icon(icon),
+            ),
             const SizedBox(height: 2),
             Text(label, style: TextStyle(color: c, fontSize: 11)),
           ],

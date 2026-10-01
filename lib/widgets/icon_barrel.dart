@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 // Ícono de barril dibujado a mano (Flutter no trae uno en su set de Material Icons).
+// Sin color o size, los toma del IconTheme más cercano, igual que Icon.
 class IconoBarril extends StatelessWidget {
-  final Color color;
-  final double size;
+  final Color? color;
+  final double? size;
 
-  const IconoBarril({super.key, required this.color, this.size = 20});
+  const IconoBarril({super.key, this.color, this.size});
 
   @override
   Widget build(BuildContext context) {
+    final iconTheme = IconTheme.of(context);
+    final size = this.size ?? iconTheme.size ?? 20;
+    final color = this.color ?? iconTheme.color ?? Colors.black;
+
     return SizedBox(
       width: size,
       height: size,
