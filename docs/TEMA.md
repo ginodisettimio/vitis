@@ -97,8 +97,8 @@ Container(
 
 No hace falta pasarles estilos: `TextField` toma `inputDecorationTheme` y `ElevatedButton` toma `elevatedButtonTheme`. Usá los widgets compartidos, que ya lo resuelven:
 
-- [`FormInput`](../lib/widgets/form_input.dart) para campos de formulario.
-- [`FormBtn`](../lib/widgets/form_btn.dart) para el botón principal.
+- [`FormInput`](../lib/widgets/forms/form_input.dart) para campos de formulario.
+- [`FormBtn`](../lib/widgets/forms/form_btn.dart) para el botón principal.
 
 ## Cuándo sí usar `AppTheme` directamente
 

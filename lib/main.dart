@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/cash_register_screen.dart';
-import 'package:vitis/screens/change_password_screen.dart';
-import 'package:vitis/screens/expenses_screen.dart';
-import 'package:vitis/screens/movements_screen.dart';
-import 'package:vitis/screens/forget_password_screen.dart';
-import 'package:vitis/screens/main_shell_screen.dart';
-import 'package:vitis/screens/add_new_wallet_screen.dart';
-import 'package:vitis/screens/login_screen.dart';
-import 'package:vitis/screens/register_screen.dart';
+import 'package:vitis/screens/transactions/cash_register_screen.dart';
+import 'package:vitis/screens/auth/change_password_screen.dart';
+import 'package:vitis/screens/dashboard/expenses_screen.dart';
+import 'package:vitis/screens/dashboard/movements_screen.dart';
+import 'package:vitis/screens/auth/forget_password_screen.dart';
+import 'package:vitis/screens/shell/main_shell_screen.dart';
+import 'package:vitis/screens/wallets/add_new_wallet_screen.dart';
+import 'package:vitis/screens/auth/login_screen.dart';
+import 'package:vitis/screens/auth/register_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
-import 'package:vitis/widgets/app_bottom_nav_bar.dart';
+import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
 
 void main() {
   runApp(const MainApp());

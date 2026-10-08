@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/dashboard_screen.dart';
-import 'package:vitis/screens/savings_screen.dart';
-import 'package:vitis/screens/settings_screen.dart';
-import 'package:vitis/screens/wallets_screen.dart';
-import 'package:vitis/widgets/app_bottom_nav_bar.dart';
+import 'package:vitis/screens/dashboard/dashboard_screen.dart';
+import 'package:vitis/screens/savings/savings_screen.dart';
+import 'package:vitis/screens/settings/settings_screen.dart';
+import 'package:vitis/screens/wallets/wallets_screen.dart';
+import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
 
 // Pantalla contenedora: una sola barra inferior y un solo FAB fijos, y en el
 // medio cambia la sección. IndexedStack mantiene vivas las cuatro secciones,

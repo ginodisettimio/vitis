@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/add_wallet_button.dart';
-import 'package:vitis/widgets/wallet_card.dart';
+import 'package:vitis/widgets/wallets/add_wallet_button.dart';
+import 'package:vitis/widgets/wallets/wallet_card.dart';
 
 class MyWalletsScreen extends StatelessWidget {
   const MyWalletsScreen({super.key});

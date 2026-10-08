@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
-import 'package:vitis/screens/expenses_screen.dart';
+import 'package:vitis/screens/dashboard/expenses_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
 
 class CategorySpendingCard extends StatelessWidget {

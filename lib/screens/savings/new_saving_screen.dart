@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../models/saving_target.dart';
-import '../models/savings_store.dart';
-import '../widgets/icon_barrel.dart';
-import '../widgets/step_progress_bar.dart';
-import '../widgets/step_tabs.dart';
-import '../widgets/wizard_header.dart';
-import '../widgets/wizard_next_button.dart';
-import '../widgets/wizard_step_form.dart';
+import 'package:vitis/models/saving_target.dart';
+import 'package:vitis/models/savings_store.dart';
+import 'package:vitis/widgets/icons/icon_barrel.dart';
+import 'package:vitis/widgets/wizard/step_progress_bar.dart';
+import 'package:vitis/widgets/wizard/step_tabs.dart';
+import 'package:vitis/widgets/wizard/wizard_header.dart';
+import 'package:vitis/widgets/wizard/wizard_next_button.dart';
+import 'package:vitis/widgets/wizard/wizard_step_form.dart';
 
 class NewSavingScreen extends StatefulWidget {
   const NewSavingScreen({super.key});

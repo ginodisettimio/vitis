@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/form_btn.dart';
-import 'package:vitis/widgets/form_input.dart';
-import 'package:vitis/widgets/vitis_logo.dart';
+import 'package:vitis/widgets/forms/form_btn.dart';
+import 'package:vitis/widgets/forms/form_input.dart';
+import 'package:vitis/widgets/icons/vitis_logo.dart';
 import 'package:vitis/utils/validator.dart';
 
 class RegisterScreen extends StatefulWidget {

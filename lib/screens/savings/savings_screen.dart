@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../models/savings_store.dart';
-import '../utils/money_formatter.dart';
-import '../widgets/icon_barrel.dart';
-import '../widgets/outlined_add_button.dart';
-import '../widgets/saving_target_card.dart';
-import '../widgets/savings_total_card.dart';
-import '../widgets/screen_header.dart';
-import 'new_saving_screen.dart';
+import 'package:vitis/models/savings_store.dart';
+import 'package:vitis/utils/money_formatter.dart';
+import 'package:vitis/widgets/icons/icon_barrel.dart';
+import 'package:vitis/widgets/forms/outlined_add_button.dart';
+import 'package:vitis/widgets/savings/saving_target_card.dart';
+import 'package:vitis/widgets/savings/savings_total_card.dart';
+import 'package:vitis/widgets/headers/screen_header.dart';
+import 'package:vitis/screens/savings/new_saving_screen.dart';
 
 class SavingsScreen extends StatefulWidget {
   const SavingsScreen({super.key});

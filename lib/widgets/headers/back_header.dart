@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/square_back_button.dart';
+import 'package:vitis/widgets/navigation/square_back_button.dart';
 
 // Encabezado de pantallas que se abren encima de otra: botón atrás y título.
 class BackHeader extends StatelessWidget {

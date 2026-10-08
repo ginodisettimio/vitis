@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/icon_barrel.dart';
+import 'package:vitis/widgets/icons/icon_barrel.dart';
 
 // Tarjeta de color primario con el total ahorrado.
 class SavingsTotalCard extends StatelessWidget {

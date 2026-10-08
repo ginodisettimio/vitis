@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/square_back_button.dart';
+import 'package:vitis/widgets/navigation/square_back_button.dart';
 
 // Encabezado de un flujo por pasos: botón atrás, título y "Paso X de N".
 class WizardHeader extends StatelessWidget {

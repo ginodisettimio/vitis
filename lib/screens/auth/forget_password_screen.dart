@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/validator.dart';
-import 'package:vitis/widgets/form_btn.dart';
-import 'package:vitis/widgets/form_input.dart';
+import 'package:vitis/widgets/forms/form_btn.dart';
+import 'package:vitis/widgets/forms/form_input.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});

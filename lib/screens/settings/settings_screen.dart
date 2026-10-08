@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
-import 'package:vitis/widgets/profile_header.dart';
-import 'package:vitis/widgets/settings_tile.dart';
+import 'package:vitis/widgets/headers/profile_header.dart';
+import 'package:vitis/widgets/settings/settings_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

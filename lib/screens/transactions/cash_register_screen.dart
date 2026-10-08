@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
-import 'package:vitis/widgets/amount_input.dart';
-import 'package:vitis/widgets/back_header.dart';
-import 'package:vitis/widgets/form_btn.dart';
-import 'package:vitis/widgets/segmented_toggle.dart';
+import 'package:vitis/widgets/forms/amount_input.dart';
+import 'package:vitis/widgets/headers/back_header.dart';
+import 'package:vitis/widgets/forms/form_btn.dart';
+import 'package:vitis/widgets/forms/segmented_toggle.dart';
 
 enum TipoRegistro { salida, ingreso }
 

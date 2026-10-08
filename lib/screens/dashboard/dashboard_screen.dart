@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
-import 'package:vitis/screens/main_shell_screen.dart';
-import 'package:vitis/widgets/app_bottom_nav_bar.dart';
-import 'package:vitis/widgets/balance_card.dart';
-import 'package:vitis/widgets/category_spending_card.dart';
-import 'package:vitis/widgets/saving_goal_card.dart';
-import 'package:vitis/widgets/see_all_text_button.dart';
-import 'package:vitis/widgets/transaction_tile.dart';
-import 'package:vitis/widgets/wallet_mini_chip.dart';
+import 'package:vitis/screens/shell/main_shell_screen.dart';
+import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
+import 'package:vitis/widgets/dashboard/balance_card.dart';
+import 'package:vitis/widgets/dashboard/category_spending_card.dart';
+import 'package:vitis/widgets/savings/saving_goal_card.dart';
+import 'package:vitis/widgets/navigation/see_all_text_button.dart';
+import 'package:vitis/widgets/dashboard/transaction_tile.dart';
+import 'package:vitis/widgets/wallets/wallet_mini_chip.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({this.userName = 'María', super.key});

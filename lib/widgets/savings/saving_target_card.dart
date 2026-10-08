@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/saving_target.dart';
 import 'package:vitis/utils/money_formatter.dart';
-import 'package:vitis/widgets/icon_barrel.dart';
+import 'package:vitis/widgets/icons/icon_barrel.dart';
 
 // Tarjeta de un objetivo de ahorro. Al tocarla se despliega la sección de retiro.
 class SavingTargetCard extends StatelessWidget {

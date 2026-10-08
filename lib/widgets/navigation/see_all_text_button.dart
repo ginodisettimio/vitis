@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/main_shell_screen.dart';
+import 'package:vitis/screens/shell/main_shell_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
-import 'package:vitis/widgets/app_bottom_nav_bar.dart';
+import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
 
 class SeeAllTextButton extends StatelessWidget {
   final String route;

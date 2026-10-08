@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/main_shell_screen.dart';
-import 'package:vitis/widgets/icon_barrel.dart';
-import 'package:vitis/widgets/icon_grape.dart';
+import 'package:vitis/screens/shell/main_shell_screen.dart';
+import 'package:vitis/widgets/icons/icon_barrel.dart';
+import 'package:vitis/widgets/icons/icon_grape.dart';
 
 // El orden del enum es el orden de las secciones en MainShellScreen.
 enum NavSection {

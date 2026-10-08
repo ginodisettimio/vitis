@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/widgets/form_btn.dart';
-import 'package:vitis/widgets/form_input.dart';
+import 'package:vitis/widgets/forms/form_btn.dart';
+import 'package:vitis/widgets/forms/form_input.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
