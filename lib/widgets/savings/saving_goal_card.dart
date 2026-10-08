@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vitis/models/dashboard_models.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/money_formatter.dart';
 
 class SavingGoalCard extends StatelessWidget {
   final SavingGoal goal;
 
   const SavingGoalCard({required this.goal, super.key});
-
-  String _money(double value) {
-    return NumberFormat.currency(
-      locale: 'es_AR',
-      symbol: '\$ ',
-      decimalDigits: 0,
-    ).format(value);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +30,7 @@ class SavingGoalCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            _money(goal.current),
+            formatearMonto(goal.current, decimales: 0),
             style: Theme.of(
               context,
             ).textTheme.bodyLarge?.copyWith(fontSize: 16),
@@ -55,7 +47,7 @@ class SavingGoalCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${(goal.progress * 100).round()}% de ${_money(goal.target)}',
+            '${(goal.progress * 100).round()}% de ${formatearMonto(goal.target, decimales: 0)}',
             style: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontSize: 11),

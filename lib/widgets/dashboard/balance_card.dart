@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/money_formatter.dart';
 
 class BalanceCard extends StatelessWidget {
   final double availableBalance;
@@ -16,16 +16,17 @@ class BalanceCard extends StatelessWidget {
     super.key,
   });
 
-  String _money(double value) {
-    return NumberFormat.currency(
-      locale: 'es_AR',
-      symbol: '\$ ',
-      decimalDigits: 2,
-    ).format(value);
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Mismos colores que Ingreso / Salida en CashRegisterScreen.
+    final Color? growthColor = monthGrowthPercent > 0
+        ? AppTheme.success
+        : monthGrowthPercent < 0
+            ? Theme.of(context).colorScheme.error
+            : null;
+    // El negativo ya trae su "-"; al positivo se le agrega el "+".
+    final growthSign = monthGrowthPercent > 0 ? '+' : '';
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -51,13 +52,13 @@ class BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            _money(availableBalance),
+            formatearMonto(availableBalance),
             style: Theme.of(context).textTheme.displayLarge
                 ?.copyWith(color: Colors.white, fontSize: 28),
           ),
           const SizedBox(height: 6),
           Text(
-            '${_money(reservedInSavings)} reservados en ahorros',
+            '${formatearMonto(reservedInSavings)} reservados en ahorros',
             style: const TextStyle(color: Colors.white70, fontSize: 12),
             overflow: TextOverflow.ellipsis,
           ),
@@ -67,7 +68,9 @@ class BalanceCard extends StatelessWidget {
               _Badge(text: '$syncedBanks bancos sincronizados'),
               const SizedBox(width: 8),
               _Badge(
-                text: '+${monthGrowthPercent.toStringAsFixed(1)}% este mes',
+                text:
+                    '$growthSign${monthGrowthPercent.toStringAsFixed(1)}% este mes',
+                color: growthColor,
               ),
             ],
           ),
@@ -77,16 +80,18 @@ class BalanceCard extends StatelessWidget {
   }
 }
 
+// Pastilla de texto blanco. Sin color, usa el fondo blanco translúcido.
 class _Badge extends StatelessWidget {
   final String text;
-  const _Badge({required this.text});
+  final Color? color;
+  const _Badge({required this.text, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.18),
+        color: color ?? Colors.white.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(

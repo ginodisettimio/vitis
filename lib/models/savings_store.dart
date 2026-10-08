@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:vitis/models/saving_target.dart';
 
@@ -29,6 +31,31 @@ class SavingsStore extends ChangeNotifier {
 
   void agregar(ObjetivoAhorro objetivo) {
     _objetivos.add(objetivo);
+    notifyListeners();
+  }
+
+  // TODO: persistir depósitos y retiros (todavía se pierden al cerrar la app).
+  // Nunca pasa de la meta: deposita como mucho lo que falta.
+  void depositar(int index, double monto) {
+    final objetivo = _objetivos[index];
+    _cambiarMonto(
+      index,
+      objetivo.montoActual + math.min(monto, objetivo.restante),
+    );
+  }
+
+  // Nunca deja el ahorro en negativo: retira como mucho lo que hay.
+  void retirar(int index, double monto) {
+    _cambiarMonto(index, math.max(0.0, _objetivos[index].montoActual - monto));
+  }
+
+  void _cambiarMonto(int index, double montoActual) {
+    final objetivo = _objetivos[index];
+    _objetivos[index] = ObjetivoAhorro(
+      titulo: objetivo.titulo,
+      montoActual: montoActual,
+      montoObjetivo: objetivo.montoObjetivo,
+    );
     notifyListeners();
   }
 }

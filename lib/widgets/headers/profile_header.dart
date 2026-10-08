@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/widgets/avatars/avatar_box.dart';
 
 class ProfileHeader extends StatelessWidget {
   final Widget avatar;
@@ -27,33 +28,7 @@ class ProfileHeader extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
       child: Row(
         children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  colorScheme.primary.withValues(alpha: 0.7),
-                  colorScheme.secondary,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            alignment: Alignment.center,
-            child: DefaultTextStyle(
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
-              ),
-              child: IconTheme(
-                data: const IconThemeData(color: Colors.white, size: 26),
-                child: avatar,
-              ),
-            ),
-          ),
+          AvatarBox(child: avatar),
           const SizedBox(width: 14),
           Expanded(
             child: Column(

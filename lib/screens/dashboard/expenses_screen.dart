@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/date_formatter.dart';
 
 class ExpensesScreen extends StatelessWidget {
   const ExpensesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final hoy = DateTime.now();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -46,7 +49,7 @@ class ExpensesScreen extends StatelessWidget {
                             ?.copyWith(fontSize: 20),
                       ),
                       Text(
-                        'Septiembre 2025',
+                        '${nombreMes(hoy.month)} ${hoy.year}',
                         style: Theme.of(context).textTheme.bodyMedium
                             ?.copyWith(fontSize: 13),
                       ),

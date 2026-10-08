@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/widgets/avatars/edit_badge.dart';
 
 // Contenido de un paso: ícono con lápiz, título, subtítulo y un campo de texto.
 class WizardStepForm extends StatelessWidget {
@@ -32,34 +33,16 @@ class WizardStepForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(child: icono),
+        EditBadge(
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(20),
             ),
-            Positioned(
-              bottom: -4,
-              right: -4,
-              child: Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: colorScheme.surface,
-                  shape: BoxShape.circle,
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black12, blurRadius: 4),
-                  ],
-                ),
-                child: Icon(Icons.edit, size: 14, color: color),
-              ),
-            ),
-          ],
+            child: Center(child: icono),
+          ),
         ),
         const SizedBox(height: 20),
         Text(

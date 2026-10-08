@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/models/dashboard_models.dart';
+import 'package:vitis/models/user_store.dart';
 import 'package:vitis/screens/shell/main_shell_screen.dart';
+import 'package:vitis/utils/date_formatter.dart';
 import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
 import 'package:vitis/widgets/dashboard/balance_card.dart';
 import 'package:vitis/widgets/dashboard/category_spending_card.dart';
@@ -10,28 +12,11 @@ import 'package:vitis/widgets/dashboard/transaction_tile.dart';
 import 'package:vitis/widgets/wallets/wallet_mini_chip.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({this.userName = 'María', super.key});
-
-  final String userName;
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    const meses = [
-      'ENERO',
-      'FEBRERO',
-      'MARZO',
-      'ABRIL',
-      'MAYO',
-      'JUNIO',
-      'JULIO',
-      'AGOSTO',
-      'SEPTIEMBRE',
-      'OCTUBRE',
-      'NOVIEMBRE',
-      'DICIEMBRE',
-    ];
-    final monthLabel = meses[now.month - 1];
+    final monthLabel = mesActual().toUpperCase();
     final accounts = MockDashboardData.accountBalances;
 
     return Scaffold(
@@ -62,10 +47,14 @@ class DashboardScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () =>
                             MainShellScreen.irA(context, NavSection.ajustes),
-                        child: Text(
-                          'Hola, $userName 👋',
-                          style: Theme.of(context).textTheme.displayLarge
-                              ?.copyWith(fontSize: 20),
+                        // Se redibuja cuando se edita el nombre en Editar perfil.
+                        child: ListenableBuilder(
+                          listenable: UserStore.instancia,
+                          builder: (context, _) => Text(
+                            'Hola, ${UserStore.instancia.primerNombre} 👋',
+                            style: Theme.of(context).textTheme.displayLarge
+                                ?.copyWith(fontSize: 20),
+                          ),
                         ),
                       ),
                     ],

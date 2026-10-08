@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/money_formatter.dart';
 
 /// Versión compacta de WalletCard para el Dashboard: un chip chico
 /// con el balance, pensado para una fila horizontal.
@@ -17,11 +17,7 @@ class WalletMiniChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color bankColor = AppTheme.bankColors[bankKey] ?? AppTheme.primary;
-    final money = NumberFormat.currency(
-      locale: 'es_AR',
-      symbol: '\$ ',
-      decimalDigits: 2,
-    ).format(balance);
+    final money = formatearMonto(balance);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

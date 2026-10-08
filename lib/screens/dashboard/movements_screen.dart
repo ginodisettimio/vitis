@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/money_formatter.dart';
 
 class MovementsScreen extends StatelessWidget {
   const MovementsScreen({super.key});
@@ -62,8 +63,7 @@ class MovementsScreen extends StatelessWidget {
                       icon: Icons.shopping_cart_outlined,
                       title: 'Supermercado Día',
                       time: '14:30',
-                      amount: '- \$ 4.250,00',
-                      isPositive: false,
+                      amount: -4250,
                     ),
                     const SizedBox(height: 12),
                     _buildMovementCard(
@@ -73,8 +73,7 @@ class MovementsScreen extends StatelessWidget {
                       icon: Icons.work_outline_rounded,
                       title: 'Sueldo agosto',
                       time: '09:00',
-                      amount: '+ \$ 95.000,00',
-                      isPositive: true,
+                      amount: 95000,
                     ),
                     const SizedBox(height: 20),
 
@@ -88,8 +87,7 @@ class MovementsScreen extends StatelessWidget {
                       icon: Icons.movie_outlined,
                       title: 'Netflix',
                       time: '10:15',
-                      amount: '- \$ 2.799,00',
-                      isPositive: false,
+                      amount: -2799,
                     ),
                     const SizedBox(height: 12),
                     _buildMovementCard(
@@ -99,8 +97,7 @@ class MovementsScreen extends StatelessWidget {
                       icon: Icons.directions_bus_outlined,
                       title: 'Carga SUBE',
                       time: '08:45',
-                      amount: '- \$ 1.200,00',
-                      isPositive: false,
+                      amount: -1200,
                     ),
                     const SizedBox(height: 20),
 
@@ -114,8 +111,7 @@ class MovementsScreen extends StatelessWidget {
                       icon: Icons.code_rounded,
                       title: 'Proyecto freelance',
                       time: '18:20',
-                      amount: '+ \$ 45.000,00',
-                      isPositive: true,
+                      amount: 45000,
                     ),
                     const SizedBox(height: 20),
                   ],
@@ -147,8 +143,7 @@ class MovementsScreen extends StatelessWidget {
     required IconData icon,
     required String title,
     required String time,
-    required String amount,
-    required bool isPositive,
+    required double amount, // positivo = ingreso, negativo = egreso
   }) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -184,48 +179,50 @@ class MovementsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           // Detalles del movimiento e importe
+          // El título ocupa el espacio libre (con "..." si no entra), así el
+          // importe nunca se sale de la tarjeta.
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: AppTheme.primarySoft,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Icon(icon, color: AppTheme.primaryVariant, size: 22),
-                  ),
-                  const SizedBox(width: 14),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        time,
-                        style: const TextStyle(
-                          color: AppTheme.textGrey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppTheme.primarySoft,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(icon, color: AppTheme.primaryVariant, size: 22),
               ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      time,
+                      style: const TextStyle(
+                        color: AppTheme.textGrey,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
               Text(
-                amount,
+                formatearMontoConSigno(amount),
                 style: TextStyle(
-                  color: isPositive ? AppTheme.success : AppTheme.error,
+                  color: amount >= 0 ? AppTheme.success : AppTheme.error,
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
                 ),

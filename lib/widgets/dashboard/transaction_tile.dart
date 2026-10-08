@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vitis/models/dashboard_models.dart';
 import 'package:vitis/utils/app_theme.dart';
+import 'package:vitis/utils/money_formatter.dart';
 
 class TransactionTile extends StatelessWidget {
   final Transaction transaction;
@@ -11,12 +11,7 @@ class TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = transaction.isIncome ? AppTheme.success : AppTheme.error;
-    final sign = transaction.isIncome ? '+' : '-';
-    final amount = NumberFormat.currency(
-      locale: 'es_AR',
-      symbol: '\$ ',
-      decimalDigits: 0,
-    ).format(transaction.amount.abs());
+    final amount = formatearMontoConSigno(transaction.amount);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -50,7 +45,7 @@ class TransactionTile extends StatelessWidget {
             ),
           ),
           Text(
-            '$sign$amount',
+            amount,
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.w800,

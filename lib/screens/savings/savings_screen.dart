@@ -40,18 +40,29 @@ class _SavingsScreenState extends State<SavingsScreen> {
     });
   }
 
+  // Monto escrito en el campo, o null si no es un número mayor a 0.
+  double? get _montoIngresado {
+    final monto = parsearMonto(_montoController.text);
+    return monto != null && monto > 0 ? monto : null;
+  }
+
+  void _depositar(int index) {
+    final monto = _montoIngresado;
+    if (monto == null || monto > _store.objetivos[index].restante) return;
+
+    _store.depositar(index, monto);
+    _cerrarSeccion();
+  }
+
   void _retirar(int index) {
-    final texto = _montoController.text
-        .replaceAll('.', '')
-        .replaceAll(',', '.');
-    final monto = double.tryParse(texto);
-    if (monto == null || monto <= 0) return;
+    final monto = _montoIngresado;
+    if (monto == null || monto > _store.objetivos[index].montoActual) return;
 
-    // TODO: acá conectás la lógica real de retiro (API, base local, etc.)
-    debugPrint(
-      'Retirar \$${monto.toStringAsFixed(2)} de ${_store.objetivos[index].titulo}',
-    );
+    _store.retirar(index, monto);
+    _cerrarSeccion();
+  }
 
+  void _cerrarSeccion() {
     setState(() {
       _indiceExpandido = null;
       _montoController.clear();
@@ -64,7 +75,7 @@ class _SavingsScreenState extends State<SavingsScreen> {
 
     return Scaffold(
       body: SafeArea(
-        // Se redibuja cuando se agrega un ahorro (desde acá o desde el "+").
+        // Se redibuja cuando cambian los ahorros (nuevo ahorro, depósito o retiro).
         child: ListenableBuilder(
           listenable: _store,
           builder: (context, _) {
@@ -77,7 +88,10 @@ class _SavingsScreenState extends State<SavingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ScreenHeader(
-                    icon: IconoBarril(color: theme.colorScheme.primary, size: 22),
+                    icon: IconoBarril(
+                      color: theme.colorScheme.primary,
+                      size: 22,
+                    ),
                     title: 'Mis Ahorros',
                     subtitle:
                         '${objetivos.length} objetivos · ${formatearMonto(total)} reservados',
@@ -93,6 +107,7 @@ class _SavingsScreenState extends State<SavingsScreen> {
                         expandido: _indiceExpandido == index,
                         onTap: () => _toggleExpandido(index),
                         montoController: _montoController,
+                        onDepositar: () => _depositar(index),
                         onRetirar: () => _retirar(index),
                       ),
                     );

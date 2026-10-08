@@ -8,6 +8,7 @@ import 'package:vitis/screens/shell/main_shell_screen.dart';
 import 'package:vitis/screens/wallets/add_new_wallet_screen.dart';
 import 'package:vitis/screens/auth/login_screen.dart';
 import 'package:vitis/screens/auth/register_screen.dart';
+import 'package:vitis/screens/settings/profile_settings_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
 import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
 
@@ -38,6 +39,7 @@ class MainApp extends StatelessWidget {
           "/expenses": (context) => ExpensesScreen(),
           "/movements": (context) => MovementsScreen(),
           "/cashregister": (context) => CashRegisterScreen(),
+          "/profilesettings": (context) => ProfileSettingsScreen(),
           "/dashboard": (context) =>
               MainShellScreen(inicial: NavSection.inicio),
           "/wallets": (context) =>

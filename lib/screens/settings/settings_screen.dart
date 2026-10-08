@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:vitis/models/user_store.dart';
 import 'package:vitis/utils/app_theme.dart';
 import 'package:vitis/widgets/headers/profile_header.dart';
 import 'package:vitis/widgets/settings/settings_tile.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   static const TextStyle _emoji = TextStyle(fontSize: 20);
+
+  // TODO: persistir estos valores (todavía se pierden al cerrar la app).
+  bool _notificacionesActivas = false;
+  bool _pinActivo = false;
+  String _moneda = 'ARS';
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +29,19 @@ class SettingsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ProfileHeader(
-                avatar: const Text('M'),
-                name: 'María González',
-                email: 'maria@email.com',
-                onActionTap: () {},
+              // Se redibuja cuando se editan los datos en Editar perfil.
+              ListenableBuilder(
+                listenable: UserStore.instancia,
+                builder: (context, _) {
+                  final usuario = UserStore.instancia;
+                  return ProfileHeader(
+                    avatar: Text(usuario.inicial),
+                    name: usuario.nombre,
+                    email: usuario.email,
+                    onActionTap: () =>
+                        Navigator.pushNamed(context, '/profilesettings'),
+                  );
+                },
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -31,22 +50,28 @@ class SettingsScreen extends StatelessWidget {
                     SettingsTile(
                       icon: Text('🔔', style: _emoji),
                       title: 'Notificaciones',
-                      trailingText: 'Activadas',
-                      onTap: () {},
+                      trailingText: _notificacionesActivas
+                          ? 'Activadas'
+                          : 'Desactivadas',
+                      onTap: () => setState(
+                        () => _notificacionesActivas = !_notificacionesActivas,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     SettingsTile(
                       icon: Text('🔒', style: _emoji),
                       title: 'Seguridad',
-                      trailingText: 'PIN activo',
-                      onTap: () {},
+                      trailingText: _pinActivo ? 'PIN activo' : 'Ninguna',
+                      onTap: () => setState(() => _pinActivo = !_pinActivo),
                     ),
                     const SizedBox(height: 10),
                     SettingsTile(
                       icon: Text('💱', style: _emoji),
                       title: 'Moneda',
-                      trailingText: 'ARS',
-                      onTap: () {},
+                      trailingText: _moneda,
+                      onTap: () => setState(
+                        () => _moneda = _moneda == 'ARS' ? 'USD' : 'ARS',
+                      ),
                     ),
                     const SizedBox(height: 10),
                     SettingsTile(
