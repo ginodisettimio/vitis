@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:vitis/screens/transactions/cash_register_screen.dart';
-import 'package:vitis/screens/auth/change_password_screen.dart';
-import 'package:vitis/screens/dashboard/expenses_screen.dart';
-import 'package:vitis/screens/dashboard/movements_screen.dart';
-import 'package:vitis/screens/auth/forget_password_screen.dart';
-import 'package:vitis/screens/shell/main_shell_screen.dart';
-import 'package:vitis/screens/wallets/add_new_wallet_screen.dart';
-import 'package:vitis/screens/auth/login_screen.dart';
-import 'package:vitis/screens/auth/register_screen.dart';
-import 'package:vitis/screens/settings/profile_settings_screen.dart';
+import 'package:vitis/data/states/session_store.dart';
+import 'package:vitis/ui/screens/transactions/cash_register_screen.dart';
+import 'package:vitis/ui/screens/auth/change_password_screen.dart';
+import 'package:vitis/ui/screens/dashboard/expenses_screen.dart';
+import 'package:vitis/ui/screens/dashboard/movements_screen.dart';
+import 'package:vitis/ui/screens/auth/forget_password_screen.dart';
+import 'package:vitis/ui/screens/shell/main_shell_screen.dart';
+import 'package:vitis/ui/screens/wallets/add_new_wallet_screen.dart';
+import 'package:vitis/ui/screens/auth/login_screen.dart';
+import 'package:vitis/ui/screens/auth/register_screen.dart';
+import 'package:vitis/ui/screens/settings/profile_settings_screen.dart';
 import 'package:vitis/utils/app_theme.dart';
-import 'package:vitis/widgets/navigation/app_bottom_nav_bar.dart';
+import 'package:vitis/ui/widgets/navigation/app_bottom_nav_bar.dart';
 
 void main() {
   runApp(const MainApp());
@@ -21,14 +22,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
-      valueListenable: AppTheme.themeMode,
-      builder: (context, themeMode, _) => MaterialApp(
+    // El tema es una preferencia del usuario: cambia con la sesión.
+    return ListenableBuilder(
+      listenable: SessionStore.instance,
+      builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const LoginScreen(),
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        themeMode: themeMode,
+        themeMode: SessionStore.instance.themeMode,
         title: "Vitis",
         routes: {
           "/login": (context) => LoginScreen(),

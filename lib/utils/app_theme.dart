@@ -32,22 +32,15 @@ class AppTheme {
     Color(0xFFC4B5F4),
   ];
 
+  // Color de una categoría por índice (vuelve al inicio si hay más que colores).
+  static Color categoryColor(int index) => pieColors[index % pieColors.length];
+
   static const Map<String, Color> bankColors = {
     'mp': Color(0xFF009EE3),
     'nx': Color(0xFFFF6900),
     'bn': Color(0xFF00509E),
     'lm': Color(0xFF7DC900),
   };
-
-  // Modo de tema actual. MainApp lo escucha para redibujar MaterialApp.
-  static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(
-    ThemeMode.system,
-  );
-
-  static void changeTheme(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    themeMode.value = isDark ? ThemeMode.light : ThemeMode.dark;
-  }
 
   static ThemeData get lightTheme {
     return ThemeData(

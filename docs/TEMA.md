@@ -1,6 +1,6 @@
 # Guía del tema de Vitis
 
-La app define un tema claro y uno oscuro en [`lib/utils/app_theme.dart`](../lib/utils/app_theme.dart), y `MaterialApp` elige cuál usar según el dispositivo (`themeMode: ThemeMode.system`). Para que una pantalla cambie sola entre claro y oscuro, **los colores y estilos tienen que salir del contexto** (`Theme.of(context)`), no de constantes fijas.
+La app define un tema claro y uno oscuro en [`lib/utils/app_theme.dart`](../lib/utils/app_theme.dart), y `MaterialApp` usa el que eligió el usuario con la sesión iniciada (su preferencia `theme`). Sin sesión o sin preferencia, sigue al dispositivo (`ThemeMode.system`). Para que una pantalla cambie sola entre claro y oscuro, **los colores y estilos tienen que salir del contexto** (`Theme.of(context)`), no de constantes fijas.
 
 ## La regla
 
@@ -97,8 +97,8 @@ Container(
 
 No hace falta pasarles estilos: `TextField` toma `inputDecorationTheme` y `ElevatedButton` toma `elevatedButtonTheme`. Usá los widgets compartidos, que ya lo resuelven:
 
-- [`FormInput`](../lib/widgets/forms/form_input.dart) para campos de formulario.
-- [`FormBtn`](../lib/widgets/forms/form_btn.dart) para el botón principal.
+- [`FormInput`](../lib/ui/widgets/forms/form_input.dart) para campos de formulario.
+- [`FormBtn`](../lib/ui/widgets/forms/form_btn.dart) para el botón principal.
 
 ## Cuándo sí usar `AppTheme` directamente
 
